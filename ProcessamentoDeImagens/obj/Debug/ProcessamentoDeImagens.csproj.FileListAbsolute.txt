@@ -1,0 +1,11 @@
+C:\Users\Felipe\Desktop\ProcessamentoDeImagens\ProcessamentoDeImagens\bin\Debug\ProcessamentoDeImagens.exe.config
+C:\Users\Felipe\Desktop\ProcessamentoDeImagens\ProcessamentoDeImagens\bin\Debug\ProcessamentoDeImagens.exe
+C:\Users\Felipe\Desktop\ProcessamentoDeImagens\ProcessamentoDeImagens\bin\Debug\ProcessamentoDeImagens.pdb
+C:\Users\Felipe\Desktop\ProcessamentoDeImagens\ProcessamentoDeImagens\obj\Debug\ProcessamentoDeImagens.csproj.AssemblyReference.cache
+C:\Users\Felipe\Desktop\ProcessamentoDeImagens\ProcessamentoDeImagens\obj\Debug\ProcessamentoDeImagens.csproj.SuggestedBindingRedirects.cache
+C:\Users\Felipe\Desktop\ProcessamentoDeImagens\ProcessamentoDeImagens\obj\Debug\ProcessamentoDeImagens.Form1.resources
+C:\Users\Felipe\Desktop\ProcessamentoDeImagens\ProcessamentoDeImagens\obj\Debug\ProcessamentoDeImagens.Properties.Resources.resources
+C:\Users\Felipe\Desktop\ProcessamentoDeImagens\ProcessamentoDeImagens\obj\Debug\ProcessamentoDeImagens.csproj.GenerateResource.cache
+C:\Users\Felipe\Desktop\ProcessamentoDeImagens\ProcessamentoDeImagens\obj\Debug\ProcessamentoDeImagens.csproj.CoreCompileInputs.cache
+C:\Users\Felipe\Desktop\ProcessamentoDeImagens\ProcessamentoDeImagens\obj\Debug\ProcessamentoDeImagens.exe
+C:\Users\Felipe\Desktop\ProcessamentoDeImagens\ProcessamentoDeImagens\obj\Debug\ProcessamentoDeImagens.pdb
