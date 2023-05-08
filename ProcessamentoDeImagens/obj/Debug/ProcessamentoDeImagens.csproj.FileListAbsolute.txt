@@ -9,3 +9,14 @@ C:\Users\Felipe\Desktop\ProcessamentoDeImagens\ProcessamentoDeImagens\obj\Debug\
 C:\Users\Felipe\Desktop\ProcessamentoDeImagens\ProcessamentoDeImagens\obj\Debug\ProcessamentoDeImagens.csproj.CoreCompileInputs.cache
 C:\Users\Felipe\Desktop\ProcessamentoDeImagens\ProcessamentoDeImagens\obj\Debug\ProcessamentoDeImagens.exe
 C:\Users\Felipe\Desktop\ProcessamentoDeImagens\ProcessamentoDeImagens\obj\Debug\ProcessamentoDeImagens.pdb
+C:\Users\Felipe\Documents\Faculdade\5 Semestre\Processamento de imagens\ProcessamentoDeImagens\ProcessamentoDeImagens\bin\Debug\ProcessamentoDeImagens.exe.config
+C:\Users\Felipe\Documents\Faculdade\5 Semestre\Processamento de imagens\ProcessamentoDeImagens\ProcessamentoDeImagens\bin\Debug\ProcessamentoDeImagens.exe
+C:\Users\Felipe\Documents\Faculdade\5 Semestre\Processamento de imagens\ProcessamentoDeImagens\ProcessamentoDeImagens\bin\Debug\ProcessamentoDeImagens.pdb
+C:\Users\Felipe\Documents\Faculdade\5 Semestre\Processamento de imagens\ProcessamentoDeImagens\ProcessamentoDeImagens\obj\Debug\ProcessamentoDeImagens.csproj.AssemblyReference.cache
+C:\Users\Felipe\Documents\Faculdade\5 Semestre\Processamento de imagens\ProcessamentoDeImagens\ProcessamentoDeImagens\obj\Debug\ProcessamentoDeImagens.csproj.SuggestedBindingRedirects.cache
+C:\Users\Felipe\Documents\Faculdade\5 Semestre\Processamento de imagens\ProcessamentoDeImagens\ProcessamentoDeImagens\obj\Debug\ProcessamentoDeImagens.Form1.resources
+C:\Users\Felipe\Documents\Faculdade\5 Semestre\Processamento de imagens\ProcessamentoDeImagens\ProcessamentoDeImagens\obj\Debug\ProcessamentoDeImagens.Properties.Resources.resources
+C:\Users\Felipe\Documents\Faculdade\5 Semestre\Processamento de imagens\ProcessamentoDeImagens\ProcessamentoDeImagens\obj\Debug\ProcessamentoDeImagens.csproj.GenerateResource.cache
+C:\Users\Felipe\Documents\Faculdade\5 Semestre\Processamento de imagens\ProcessamentoDeImagens\ProcessamentoDeImagens\obj\Debug\ProcessamentoDeImagens.csproj.CoreCompileInputs.cache
+C:\Users\Felipe\Documents\Faculdade\5 Semestre\Processamento de imagens\ProcessamentoDeImagens\ProcessamentoDeImagens\obj\Debug\ProcessamentoDeImagens.exe
+C:\Users\Felipe\Documents\Faculdade\5 Semestre\Processamento de imagens\ProcessamentoDeImagens\ProcessamentoDeImagens\obj\Debug\ProcessamentoDeImagens.pdb

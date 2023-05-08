@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 using Encoder = System.Drawing.Imaging.Encoder;
 
 namespace ProcessamentoDeImagens
@@ -35,6 +36,16 @@ namespace ProcessamentoDeImagens
         private byte[,] vImg3G;
         private byte[,] vImg3B;
         private byte[,] vImg3A;
+
+
+        Bitmap img, imgEq, novaImg;
+        Color pixel;
+        int red, green, blue;
+        int[] histogramaR, histogramaG, histogramaB;
+        float[] histAcumuladoR, histAcumuladoG, histAcumuladoB;
+        int[] mapaCoresR, mapaCoresG, mapaCoresB;
+        int tomR, tomG, tomB, novoTomR, novoTomG, novoTomB;
+
         public Form1()
         {
             InitializeComponent();
@@ -213,11 +224,13 @@ namespace ProcessamentoDeImagens
             return outputImage;
         }
 
-        private Bitmap generateImage()
+        private Bitmap generateImage(int seed=-1)
         {
-            Bitmap image = new Bitmap(80, 80, PixelFormat.Format8bppIndexed);
+            Random randNum = new Random();
+            if (seed==-1)seed= randNum.Next();
+            Bitmap image = new Bitmap(40, 40, PixelFormat.Format8bppIndexed);
             var bitmapData = image.LockBits(new Rectangle(Point.Empty, image.Size), ImageLockMode.ReadWrite, image.PixelFormat);
-            Random random = new Random();
+            Random random = new Random(seed);
             byte[] buffer = new byte[image.Width * image.Height];
             random.NextBytes(buffer);
             System.Runtime.InteropServices.Marshal.Copy(buffer, 0, bitmapData.Scan0, buffer.Length);
@@ -286,38 +299,33 @@ namespace ProcessamentoDeImagens
             return outputImage;
         }
 
-        private Bitmap addImages(Bitmap img1, Bitmap img2)
+        private Bitmap addImages(Bitmap image, double num)
         {
-            Bitmap imgA = resizeImage(img1);
-            Bitmap imgB = resizeImage(img2);
-            Bitmap outputImage = new Bitmap(imgA.Width, imgB.Height);
-
+            Bitmap outputImage = new Bitmap(image.Width, image.Height);
             int x, y;
 
-            for (x = 0; x < imgA.Width; x++)
+            for (x = 0; x < image.Width; x++)
             {
-                for (y = 0; y < imgA.Height; y++)
+                for (y = 0; y < image.Height; y++)
                 {
-                    Color color1 = imgA.GetPixel(x, y);
-                    Color color2 = imgB.GetPixel(x, y);
-                    Color color;
+                    Color color = image.GetPixel(x, y);
+                    Color colorOut;
                     int R, G, B;
-                    if (color1 != color2)
-                    {
-                        R = color1.R + color2.R;
-                        G = color1.G + color2.G;
-                        B = color1.B + color2.B;
 
-                        if (R > 255) R = 255;
-                        if (G > 255) G = 255;
-                        if (B > 255) B = 255;
-                        color = Color.FromArgb(R, G, B);
-                    }
-                    else color = color1;
-                    outputImage.SetPixel(x, y, color);
+                    R = (int)(color.R + num);
+                    G = (int)(color.G + num);
+                    B = (int)(color.B + num);
+                    if (R > 255) R = 255;
+                    if (G > 255) G = 255;
+                    if (B > 255) B = 255;
+
+                    colorOut = Color.FromArgb(R, G, B);
+
+                    outputImage.SetPixel(x, y, colorOut);
                 }
             }
             return outputImage;
+
         }
 
         private bool exportImage(Bitmap image)
@@ -349,9 +357,9 @@ namespace ProcessamentoDeImagens
         }
 
 
-        private Bitmap subImages(Bitmap img1, Bitmap img2)
+        private Bitmap subImages(Bitmap image, double num)
         {
-            Bitmap imgA = resizeImage(img1);
+                Bitmap imgA = resizeImage(img1);
             Bitmap imgB = resizeImage(img2);
             Bitmap outputImage = new Bitmap(imgA.Width, imgB.Height);
 
@@ -361,23 +369,20 @@ namespace ProcessamentoDeImagens
             {
                 for (y = 0; y < imgA.Height; y++)
                 {
-                    Color color1 = imgA.GetPixel(x, y);
-                    Color color2 = imgB.GetPixel(x, y);
-                    Color color;
+                    Color color = image.GetPixel(x, y);
+                    Color colorOut;
                     int R, G, B;
-                    if (color1 != color2)
-                    {
-                        R = color1.R - color2.R;
-                        G = color1.G - color2.G;
-                        B = color1.B - color2.B;
 
-                        if (R < 0) R = 0;
-                        if (G < 0) G = 0;
-                        if (B < 0) B = 0;
-                        color = Color.FromArgb(R, G, B);
-                    }
-                    else color = color1;
-                    outputImage.SetPixel(x, y, color);
+                    R = (int)(color.R - num);
+                    G = (int)(color.G - num);
+                    B = (int)(color.B - num);
+                    if (R < 0) R = 0;
+                    if (G < 0) G = 0;
+                    if (B < 0) B = 0;
+
+                    colorOut = Color.FromArgb(R, G, B);
+
+                    outputImage.SetPixel(x, y, colorOut);
                 }
             }
             return outputImage;
@@ -410,7 +415,7 @@ namespace ProcessamentoDeImagens
             return outputImage;
         }
 
-        private Bitmap divImages(Bitmap img1, Bitmap img2)
+        private Bitmap divTwoImages(Bitmap img1, Bitmap img2)
         {
             Bitmap imgA = resizeImage(img1);
             Bitmap imgB = resizeImage(img2);
@@ -427,30 +432,30 @@ namespace ProcessamentoDeImagens
                     int R2 = color2.R, G2 = color2.G, B2 = color2.B;
                     Color color;
                     int R, G, B;
+                    
+                        if (color2.R < 1) R2 = 1;
+                        if (color2.G < 1) G2 = 1;
+                        if (color2.B < 1) B2 = 1;
+                        R = (int)(color1.R / R2);
+                        G = (int)(color1.G / G2);
+                        B = (int)(color1.B / B2);
 
-                    if (color2.R < 1) R2=1;
-                    if (color2.G < 1) G2=1;
-                    if (color2.B < 1) B2=1;
-                    R = (int)(color1.R / R2);
-                    G = (int)(color1.G / G2);
-                    B = (int)(color1.B / B2);
 
-                    if (R < 0) R = 0;
-                    else if (R > 255) R = 255;
-                    if (G < 0) G = 0;
-                    else if (G > 255) G = 255;
-                    if (B < 0) B = 0;
-                    else if (B > 255) B = 255;
+                        if (R > 255) R = 255;
+                        if (G > 255) G = 255;
+                        if (B > 255) B = 255;
 
-                    color = Color.FromArgb(R, G, B);
 
+                        color = Color.FromArgb(R, G, B);
+                    
                     outputImage.SetPixel(x, y, color);
                 }
             }
-            return outputImage;
+                return outputImage;
+            
         }
-
-        private Bitmap multiplyImages(Bitmap img1, Bitmap img2)
+        
+        private Bitmap multiplyTwoImages(Bitmap img1, Bitmap img2)
         {
             Bitmap imgA = resizeImage(img1);
             Bitmap imgB = resizeImage(img2);
@@ -486,6 +491,7 @@ namespace ProcessamentoDeImagens
 
             return outputImage;
         }
+        
 
         private Bitmap andImages(Bitmap img1, Bitmap img2)
         {
@@ -741,7 +747,7 @@ namespace ProcessamentoDeImagens
         }
 
 
-        private void btnNotA_Click(object sender, EventArgs e)
+        private void btnNegaA_Click(object sender, EventArgs e)
         {
             try
             {
@@ -941,7 +947,7 @@ namespace ProcessamentoDeImagens
         }
 
 
-        private void btnNotB_Click(object sender, EventArgs e)
+        private void btnNegaB_Click(object sender, EventArgs e)
         {
             try
             {
@@ -1100,7 +1106,7 @@ namespace ProcessamentoDeImagens
             }
         }
 
-        private void btnExport_Click(object sender, EventArgs e)
+        private void btnExportR_Click(object sender, EventArgs e)
         {
             try
             {
@@ -1124,40 +1130,210 @@ namespace ProcessamentoDeImagens
             }
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void btnExportA_Click(object sender, EventArgs e)
         {
             try
             {
                 verifyImage(img1);
-                verifyImage(img2);
 
-                imgR = addImages(img1, img2);
-                pbResult.Image = imgR;
+                exportImage(img1);
+
+                MessageBox.Show("Success when exporting image",
+                    "Image result exported to executable directory",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message,
-                    "Error adding images",
+                    "Error export image",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
         }
 
-        private void btnSub_Click(object sender, EventArgs e)
+        private void btnExportB_Click(object sender, EventArgs e)
         {
             try
             {
-                verifyImage(img1);
                 verifyImage(img2);
-                imgR = subImages(img1, img2);
-                pbResult.Image = imgR;
+
+                exportImage(img2);
+
+                MessageBox.Show("Success when exporting image",
+                    "Image result exported to executable directory",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message,
-                    "Error subtracting images",
+                    "Error export image",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+            }
+        }
+
+        private Bitmap addTwoImages(Bitmap img1, Bitmap img2)
+        {
+            Bitmap imgA = resizeImage(img1);
+            Bitmap imgB = resizeImage(img2);
+            Bitmap outputImage = new Bitmap(imgA.Width, imgB.Height);
+
+            int x, y;
+
+            for (x = 0; x < imgA.Width; x++)
+            {
+                for (y = 0; y < imgA.Height; y++)
+                {
+                    Color color1 = imgA.GetPixel(x, y);
+                    Color color2 = imgB.GetPixel(x, y);
+                    Color color;
+                    int R, G, B;
+                    
+                        R = color1.R + color2.R;
+                        G = color1.G + color2.G;
+                        B = color1.B + color2.B;
+
+                        if (R > 255) R = 255;
+                        if (G > 255) G = 255;
+                        if (B > 255) B = 255;
+                        color = Color.FromArgb(R, G, B);
+                    
+                    outputImage.SetPixel(x, y, color);
+                }
+            }
+            return outputImage;
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            string txt = txtAddR.Text;
+            if (txt=="") {
+                try
+                {
+                    verifyImage(img1);
+                    verifyImage(img2);
+
+                    imgR = addTwoImages(img1, img2);
+                    pbResult.Image = imgR;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message,
+                        "Error adding images",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            }
+            else {
+                if (!double.TryParse(txt, out double num))
+                {
+                    MessageBox.Show("Only numbers", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else if (num <= 0 || num > 255)
+                {
+                    MessageBox.Show("Please insert a value in range 1 - 255", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                try
+                {
+                    verifyImage(imgR);
+                    imgR = addImages(imgR, double.Parse(txt));
+                    pbResult.Image = imgR;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message,
+                        "Error to add images",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private Bitmap subTwoImages(Bitmap img1, Bitmap img2)
+        {
+            Bitmap imgA = resizeImage(img1);
+            Bitmap imgB = resizeImage(img2);
+            Bitmap outputImage = new Bitmap(imgA.Width, imgB.Height);
+
+            int x, y;
+
+            for (x = 0; x < imgA.Width; x++)
+            {
+                for (y = 0; y < imgA.Height; y++)
+                {
+                    Color color1 = imgA.GetPixel(x, y);
+                    Color color2 = imgB.GetPixel(x, y);
+                    Color color;
+                    int R, G, B;
+                    
+                        int R2 = color2.R, G2 = color2.G, B2 = color2.B;
+
+                        R = (int)(color1.R - R2);
+                        G = (int)(color1.G - G2);
+                        B = (int)(color1.B - B2);
+
+                        if (R < 0) R = 0;
+                        if (G < 0) G = 0;
+                        if (B < 0) B = 0;
+                        color = Color.FromArgb(R, G, B);
+               
+                    outputImage.SetPixel(x, y, color);
+                }
+            }
+            return outputImage;
+        }
+        private void btnSub_Click(object sender, EventArgs e)
+        {
+            string txt = txtSubR.Text;
+            if (txt == "")
+            {
+                try
+                {
+                    verifyImage(img1);
+                    verifyImage(img2);
+
+                    imgR = subTwoImages(img1, img2);
+                    pbResult.Image = imgR;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message,
+                        "Error subtraction images",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                if (!double.TryParse(txt, out double num))
+                {
+                    MessageBox.Show("Only numbers", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else if (num <= 0 || num > 255)
+                {
+                    MessageBox.Show("Please insert a value in range 1 - 255", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                try
+                {
+                    verifyImage(imgR);
+                    imgR = subImages(imgR, double.Parse(txt));
+                    pbResult.Image = imgR;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message,
+                        "Error to add images",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -1181,37 +1357,101 @@ namespace ProcessamentoDeImagens
 
         private void btnDiv_Click(object sender, EventArgs e)
         {
-            try
+            string txt = txtDivR.Text;
+            if (txt == "")
             {
-                verifyImage(img1);
-                verifyImage(img2);
-                imgR = divImages(img1, img2);
-                pbResult.Image = imgR;
+                try
+                {
+                    verifyImage(img1);
+                    verifyImage(img2);
+
+                    imgR = divTwoImages(img1, img2);
+                    pbResult.Image = imgR;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message,
+                        "Error division images",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message,
-                    "Error to divide images",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+            else {
+                if (!double.TryParse(txt, out double num))
+                {
+                    MessageBox.Show("Only numbers", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else if (num <= 0 || num > 255)
+                {
+                    MessageBox.Show("Please insert a value in range 1 - 255", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                try
+                {
+                    verifyImage(imgR);
+                    imgR = divImage(imgR, double.Parse(txt));
+                    pbResult.Image = imgR;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message,
+                        "Error to divide images",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
             }
         }
 
+ 
+
         private void btnMult_Click(object sender, EventArgs e)
         {
-            try
+            string txt = txtMultR.Text;
+            if (txt == "")
             {
-                verifyImage(img1);
-                verifyImage(img2);
-                imgR = multiplyImages(img1, img2);
-                pbResult.Image = imgR;
+                try
+                {
+                    verifyImage(img1);
+                    verifyImage(img2);
+
+                    imgR = multiplyTwoImages(img1, img2);
+                    pbResult.Image = imgR;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message,
+                        "Error division images",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message,
-                    "Error when multiplying images",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+            else {
+                if (!double.TryParse(txt, out double num))
+                {
+                    MessageBox.Show("Only numbers", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else if (num <= 0 || num > 255)
+                {
+                    MessageBox.Show("Please insert a value in range 1 - 255", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                try
+                {
+                    verifyImage(imgR);
+                    imgR = multImage(imgR, double.Parse(txt));
+                    pbResult.Image = imgR;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message,
+                        "Error to divide images",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -1247,6 +1487,92 @@ namespace ProcessamentoDeImagens
                     "Error blending images",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnGrayR_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                verifyImage(imgR);
+                imgR = toGray(imgR);
+                pbResult.Image = imgR;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,
+                    "Error convert to gray image",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnBinaryR_Click(object sender, EventArgs e)
+        {
+            string txt = txtBinR.Text;
+            if (txt == "") txt = "0,5";
+            else if (!double.TryParse(txt, out double num))
+            {
+                MessageBox.Show("Only numbers", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else if (num <= 0 || num > 1)
+            {
+                MessageBox.Show("Please insert a value in range 0.0 - 1.0", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            try
+            {
+                verifyImage(imgR);
+                imgR = toBinary(imgR, double.Parse(txt));
+                pbResult.Image = imgR;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,
+                    "Error convert to binary image",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var filePath = string.Empty;
+            openFileDialog1.InitialDirectory = "C:\\MatLab";
+            openFileDialog1.Filter = "TIFF image (*.tif)|*.tif" +
+                "|JPG image (*.jpg)|*.jpg" +
+                "|BMP image (*.bmp)|*.bmp" +
+                "|PNG image (*.png)|*.png" +
+                "|All files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 2;
+            openFileDialog1.RestoreDirectory = true;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                filePath = openFileDialog1.FileName;
+
+                bool bLoadImgOk = false;
+
+                try
+                {
+                    imgR = new Bitmap(filePath);
+                    bLoadImgOk = true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message,
+                        "Error opening image R",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    bLoadImgOk = false;
+                }
+
+                if (bLoadImgOk)
+                {
+                    pbResult.Image = imgR;
+                }
             }
         }
 
@@ -1330,13 +1656,15 @@ namespace ProcessamentoDeImagens
         {
             try
             {
-                img1 = generateImage();
+                Random randNum = new Random();
+       
+                img1 = generateImage(randNum.Next());
                 pbA.Image = img1;
 
-                img2 = generateImage();
+                img2 = generateImage(randNum.Next());
                 pbB.Image = img2;
 
-                imgR = addImages(img1, img2);
+                imgR = addTwoImages(img1, img2);
                 pbResult.Image = imgR;
             }
             catch (Exception ex)
@@ -1384,6 +1712,154 @@ namespace ProcessamentoDeImagens
                     MessageBoxIcon.Error);
             }
         }
+
+        private void btnNegative_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                verifyImage(imgR);
+                imgR = invertImageColor(imgR);
+                pbResult.Image = imgR;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,
+                    "Error convert to NOT image",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+        private int maxValue(int[] hist)
+        {
+            for (int i = (hist.Length - 1); i >= 0; i--)
+            {
+                if (hist[i] != 0)
+                    return i;
+            }
+            return 0;
+        }
+
+        private int minValue(int[] hist)
+        {
+            for (int i = 0; i <= (hist.Length - 1); i++)
+            {
+                if (hist[i] != 0)
+                    return i;
+            }
+            return 0;
+        }
+
+        private int mediumValue(int[] hist)
+        {
+            int soma = 0;
+            for (int i = 0; i <= (hist.Length - 1); i++)
+            {
+                    soma += hist[i];
+            }
+            return soma / (hist.Length - 1);
+        }
+
+
+        private void gerarGraficoHistogramaEq(string canal)
+        {
+            canal.ToUpper();
+            switch (canal)
+            {
+                case "P":
+                    for (int i = 0; i < 256; i++)
+                    {
+                        chart_P_Equalizado.Series[0].Points.AddXY(i + 1, histogramaR[i]);
+                    }
+                    break;
+            }
+        }
+        private void calcularHistograma(Bitmap img, string canal)
+        {
+            if (img != null)
+            {
+                canal.ToUpper();
+                switch (canal)
+                {
+                    case "P":
+                        for (int x = 0; x < img.Width; x++)
+                        {
+                            for (int y = 0; y < img.Height; y++)
+                            {
+                                pixel = img.GetPixel(x, y);
+                                red = pixel.R;
+                                histogramaR[red]++;
+                            }
+                        }
+                        break;
+                }
+            }
+        }
+
+      
+        private Bitmap equalizarImagem(Bitmap imagem)
+        {
+            histogramaR = new int[256];
+            histAcumuladoR = new float[256];
+
+            //Calcula histograma
+            calcularHistograma(imagem, "P");
+            //Cria o gráfico do histograma
+            //gerarGraficoHistograma("P");
+
+            //Calcula histograma acumulado
+            float aux = histAcumuladoR[0];
+            for (int i = 1; i < histogramaR.Length; i++)
+            {
+                if (histogramaR[i] != 0)
+                {
+                    histAcumuladoR[i] = aux + ((float)histogramaR[i] / (imagem.Width * imagem.Height));
+                    aux = histAcumuladoR[i];
+                }
+            }
+
+            //Calcula mapa de cores
+            int[] mapaCores = new int[256];
+
+            String filter = cbValueFilter.Text;
+            int numberFilter = 0;
+            if (filter == "Max value") numberFilter = maxValue(histogramaR);
+            else if (filter == "Medium value") numberFilter = mediumValue(histogramaR);
+            else if (filter == "Min value") numberFilter = minValue(histogramaR);
+
+
+            for (int i = 0; i < histogramaR.Length; i++)
+                mapaCores[i] = (int)(Math.Round(histAcumuladoR[i] * numberFilter));
+
+
+
+            //Equalizando imagem
+            novaImg = new Bitmap(imagem.Width, imagem.Height);
+            for (int m = 0; m < imagem.Width; m++)
+            {
+                for (int n = 0; n < imagem.Height; n++)
+                {
+                    pixel = imagem.GetPixel(m, n);
+                    tomR = pixel.R;
+                    novoTomR = mapaCores[tomR];
+                    novaImg.SetPixel(m, n, Color.FromArgb(novoTomR, novoTomR, novoTomR));
+                }
+            }
+            return novaImg;
+        }
+
+        private void bt_hist_Click(object sender, EventArgs e)
+        {
+            verifyImage(imgR);
+            imgEq = equalizarImagem(imgR);
+            chart_P_Equalizado.Series[0].Points.Clear();
+            histogramaR = new int[256];
+
+            calcularHistograma(imgEq, "P");
+            gerarGraficoHistogramaEq("P");
+
+        }
+
+
     }
 
 }
