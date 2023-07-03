@@ -1,0 +1,9 @@
+C:\Users\Pete\Desktop\BlurExample\BlurExample\bin\Release\BlurExample.exe.config
+C:\Users\Pete\Desktop\BlurExample\BlurExample\bin\Release\BlurExample.exe
+C:\Users\Pete\Desktop\BlurExample\BlurExample\bin\Release\BlurExample.pdb
+C:\Users\Pete\Desktop\BlurExample\BlurExample\obj\Release\BlurExample.csprojAssemblyReference.cache
+C:\Users\Pete\Desktop\BlurExample\BlurExample\obj\Release\BlurExample.FrmMain.resources
+C:\Users\Pete\Desktop\BlurExample\BlurExample\obj\Release\BlurExample.Properties.Resources.resources
+C:\Users\Pete\Desktop\BlurExample\BlurExample\obj\Release\BlurExample.csproj.GenerateResource.cache
+C:\Users\Pete\Desktop\BlurExample\BlurExample\obj\Release\BlurExample.exe
+C:\Users\Pete\Desktop\BlurExample\BlurExample\obj\Release\BlurExample.pdb

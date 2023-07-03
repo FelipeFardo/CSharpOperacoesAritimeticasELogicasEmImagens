@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
 using Encoder = System.Drawing.Imaging.Encoder;
+using System.Collections;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 namespace ProcessamentoDeImagens
 {
@@ -110,12 +113,12 @@ namespace ProcessamentoDeImagens
             return outputImage;
         }
 
-        private Bitmap toBinary(Bitmap image, double thresh)
+        private Bitmap toBinary(Bitmap image, decimal thresh)
         {
             Bitmap outputImage = new Bitmap(image.Width, image.Height);
 
             int x, y;
-            double thresold = 255 * thresh;
+            decimal thresold = 255 * thresh;
 
             for (x = 0; x < image.Width; x++)
             {
@@ -148,7 +151,7 @@ namespace ProcessamentoDeImagens
             return outputImage;
         }
 
-        private Bitmap multImage(Bitmap image, double num)
+        private Bitmap multImage(Bitmap image, decimal num)
         {
             Bitmap outputImage = new Bitmap(image.Width, image.Height);
 
@@ -178,7 +181,7 @@ namespace ProcessamentoDeImagens
             return outputImage;
         }
 
-        private Bitmap divImage(Bitmap image, double num)
+        private Bitmap divImage(Bitmap image, decimal num)
         {
             Bitmap outputImage = new Bitmap(image.Width, image.Height);
 
@@ -262,7 +265,7 @@ namespace ProcessamentoDeImagens
             return new Bitmap(imgToResize, size);
         }
 
-        private Bitmap blendImages(Bitmap img1, Bitmap img2, double num)
+        private Bitmap blendImages(Bitmap img1, Bitmap img2, decimal num)
         {
             Bitmap imgA = resizeImage(img1);
             Bitmap imgB = resizeImage(img2);
@@ -299,7 +302,7 @@ namespace ProcessamentoDeImagens
             return outputImage;
         }
 
-        private Bitmap addImages(Bitmap image, double num)
+        private Bitmap addImages(Bitmap image, decimal num)
         {
             Bitmap outputImage = new Bitmap(image.Width, image.Height);
             int x, y;
@@ -357,7 +360,7 @@ namespace ProcessamentoDeImagens
         }
 
 
-        private Bitmap subImages(Bitmap image, double num)
+        private Bitmap subImages(Bitmap image, decimal num)
         {
                 Bitmap imgA = resizeImage(img1);
             Bitmap imgB = resizeImage(img2);
@@ -486,6 +489,7 @@ namespace ProcessamentoDeImagens
                     color = Color.FromArgb(R, G, B);
 
                     outputImage.SetPixel(x, y, color);
+                
                 }
             }
 
@@ -497,8 +501,8 @@ namespace ProcessamentoDeImagens
         {
             Bitmap imgA = resizeImage(img1);
             Bitmap imgB = resizeImage(img2);
-            imgA = toBinary(imgA, 0.5);
-            imgB = toBinary(imgB, 0.5);
+            imgA = toBinary(imgA, Convert.ToDecimal(0.50));
+            imgB = toBinary(imgB, Convert.ToDecimal(0.50));
             Bitmap outputImage = new Bitmap(imgA.Width, imgB.Height);
 
             int x, y;
@@ -542,8 +546,8 @@ namespace ProcessamentoDeImagens
         {
             Bitmap imgA = resizeImage(img1);
             Bitmap imgB = resizeImage(img2);
-            imgA = toBinary(imgA, 0.5);
-            imgB = toBinary(imgB, 0.5);
+            imgA = toBinary(imgA, Convert.ToDecimal(0.50));
+            imgB = toBinary(imgB, Convert.ToDecimal(0.50));
             Bitmap outputImage = new Bitmap(imgA.Width, imgB.Height);
 
             int x, y;
@@ -587,8 +591,8 @@ namespace ProcessamentoDeImagens
         {
             Bitmap imgA = resizeImage(img1);
             Bitmap imgB = resizeImage(img2);
-            imgA = toBinary(imgA, 0.5);
-            imgB = toBinary(imgB, 0.5);
+            imgA = toBinary(imgA, Convert.ToDecimal(0.50));
+            imgB = toBinary(imgB, Convert.ToDecimal(0.50));
             Bitmap outputImage = new Bitmap(imgA.Width, imgB.Height);
 
             int x, y;
@@ -632,8 +636,8 @@ namespace ProcessamentoDeImagens
         {
             Bitmap imgA = resizeImage(img1);
             Bitmap imgB = resizeImage(img2);
-            imgA = toBinary(imgA, 0.5);
-            imgB = toBinary(imgB, 0.5);
+            imgA = toBinary(imgA, Convert.ToDecimal(0.50));
+            imgB = toBinary(imgB, Convert.ToDecimal(0.50));
             Bitmap outputImage = new Bitmap(imgA.Width, imgB.Height);
 
             int x, y;
@@ -785,14 +789,8 @@ namespace ProcessamentoDeImagens
 
         private void btnBinaryA_Click(object sender, EventArgs e)
         {
-            string txt = txtBinA.Text;
-            if (txt == "") txt = "0,5";
-            else if (!double.TryParse(txt, out double num))
-            {
-                MessageBox.Show("Only numbers", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            else if (num <= 0 || num > 1)
+            decimal txt = txtBinA.Value;
+            if (txt <= 0 || txt > 1)
             {
                 MessageBox.Show("Please insert a value in range 0.0 - 1.0", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -801,7 +799,7 @@ namespace ProcessamentoDeImagens
             try
             {
                 verifyImage(img1);
-                img1 = toBinary(img1, double.Parse(txt));
+                img1 = toBinary(img1, txt);
                 pbA.Image = img1;
             }
             catch (Exception ex)
@@ -815,14 +813,8 @@ namespace ProcessamentoDeImagens
 
         private void btnMultA_Click(object sender, EventArgs e)
         {
-            string txt = txtMultA.Text;
-            if (txt == "") txt = "1";
-            else if (!double.TryParse(txt, out double num))
-            {
-                MessageBox.Show("Only numbers", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            else if (num <= 0)
+            decimal txt = txtMultA.Value;
+            if (txt <= 0)
             {
                 MessageBox.Show("Enter a value greater than 1", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -831,7 +823,7 @@ namespace ProcessamentoDeImagens
             try
             {
                 verifyImage(img1);
-                img1 = multImage(img1, double.Parse(txt));
+                img1 = multImage(img1, Convert.ToDecimal(txt));
                 pbA.Image = img1;
             }
             catch (Exception ex)
@@ -845,14 +837,8 @@ namespace ProcessamentoDeImagens
 
         private void btnDivA_Click(object sender, EventArgs e)
         {
-            string txt = txtDivA.Text;
-            if (txt == "") txt = "1";
-            else if (!double.TryParse(txt, out double num))
-            {
-                MessageBox.Show("Only numbers", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            else if (num <= 0 || num > 255)
+            decimal txt = txtDivA.Value;
+            if (txt <= 0 || txt > 255)
             {
                 MessageBox.Show("Please insert a value in range 1 - 255", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -861,7 +847,7 @@ namespace ProcessamentoDeImagens
             try
             {
                 verifyImage(img1);
-                img1 = divImage(img1, double.Parse(txt));
+                img1 = divImage(img1, Convert.ToDecimal(txt));
                 pbA.Image = img1;
             }
             catch (Exception ex)
@@ -984,14 +970,10 @@ namespace ProcessamentoDeImagens
 
         private void btnBinaryB_Click(object sender, EventArgs e)
         {
-            string txt = txtBinA.Text;
-            if (txt == "") txt = "0,5";
-            else if (!double.TryParse(txt, out double num))
-            {
-                MessageBox.Show("Only numbers", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            else if (num <= 0 || num > 1)
+            decimal txt = txtAddR.Value;
+
+         
+            if (txt <= 0 || txt > 1)
             {
                 MessageBox.Show("Please insert a value in range 0.0 - 1.0", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -1000,7 +982,7 @@ namespace ProcessamentoDeImagens
             try
             {
                 verifyImage(img2);
-                img2 = toBinary(img2, double.Parse(txt));
+                img2 = toBinary(img2, txt);
                 pbB.Image = img2;
             }
             catch (Exception ex)
@@ -1014,14 +996,8 @@ namespace ProcessamentoDeImagens
 
         private void btnMultB_Click(object sender, EventArgs e)
         {
-            string txt = txtMultA.Text;
-            if (txt == "") txt = "1";
-            else if (!double.TryParse(txt, out double num))
-            {
-                MessageBox.Show("Only numbers", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            else if (num <= 0)
+            decimal txt = txtMultA.Value;
+            if (txt <= 0)
             {
                 MessageBox.Show("Enter a value greater than 1", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -1030,7 +1006,7 @@ namespace ProcessamentoDeImagens
             try
             {
                 verifyImage(img2);
-                img2 = multImage(img2, double.Parse(txt));
+                img2 = multImage(img2, Convert.ToDecimal(txt));
                 pbB.Image = img2;
             }
             catch (Exception ex)
@@ -1044,14 +1020,8 @@ namespace ProcessamentoDeImagens
 
         private void btnDivB_Click(object sender, EventArgs e)
         {
-            string txt = txtDivA.Text;
-            if (txt == "") txt = "1";
-            else if (!double.TryParse(txt, out double num))
-            {
-                MessageBox.Show("Only numbers", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            else if (num <= 0 || num > 255)
+            decimal txt = txtDivA.Value;
+            if (txt <= 0 || txt > 255)
             {
                 MessageBox.Show("Please insert a value in range 1 - 255", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -1060,7 +1030,7 @@ namespace ProcessamentoDeImagens
             try
             {
                 verifyImage(img2);
-                img2 = divImage(img2, double.Parse(txt));
+                img2 = divImage(img2, Convert.ToDecimal(txt));
                 pbB.Image = img2;
             }
             catch (Exception ex)
@@ -1210,8 +1180,9 @@ namespace ProcessamentoDeImagens
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            string txt = txtAddR.Text;
-            if (txt=="") {
+            decimal txt = txtAddR.Value;
+
+            if (txt==0) {
                 try
                 {
                     verifyImage(img1);
@@ -1229,12 +1200,7 @@ namespace ProcessamentoDeImagens
                 }
             }
             else {
-                if (!double.TryParse(txt, out double num))
-                {
-                    MessageBox.Show("Only numbers", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                else if (num <= 0 || num > 255)
+                if (txt <= 0 || txt > 255)
                 {
                     MessageBox.Show("Please insert a value in range 1 - 255", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
@@ -1242,7 +1208,7 @@ namespace ProcessamentoDeImagens
                 try
                 {
                     verifyImage(imgR);
-                    imgR = addImages(imgR, double.Parse(txt));
+                    imgR = addImages(imgR, txt);
                     pbResult.Image = imgR;
                 }
                 catch (Exception ex)
@@ -1290,8 +1256,9 @@ namespace ProcessamentoDeImagens
         }
         private void btnSub_Click(object sender, EventArgs e)
         {
-            string txt = txtSubR.Text;
-            if (txt == "")
+            decimal txt = txtSubR.Value;
+
+            if (txt == 0)
             {
                 try
                 {
@@ -1311,12 +1278,7 @@ namespace ProcessamentoDeImagens
             }
             else
             {
-                if (!double.TryParse(txt, out double num))
-                {
-                    MessageBox.Show("Only numbers", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                else if (num <= 0 || num > 255)
+                if (txt <= 0 || txt > 255)
                 {
                     MessageBox.Show("Please insert a value in range 1 - 255", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
@@ -1324,7 +1286,7 @@ namespace ProcessamentoDeImagens
                 try
                 {
                     verifyImage(imgR);
-                    imgR = subImages(imgR, double.Parse(txt));
+                    imgR = subImages(imgR, txt);
                     pbResult.Image = imgR;
                 }
                 catch (Exception ex)
@@ -1357,8 +1319,9 @@ namespace ProcessamentoDeImagens
 
         private void btnDiv_Click(object sender, EventArgs e)
         {
-            string txt = txtDivR.Text;
-            if (txt == "")
+            decimal txt = txtDivR.Value;
+
+            if (txt == 0)
             {
                 try
                 {
@@ -1377,12 +1340,7 @@ namespace ProcessamentoDeImagens
                 }
             }
             else {
-                if (!double.TryParse(txt, out double num))
-                {
-                    MessageBox.Show("Only numbers", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                else if (num <= 0 || num > 255)
+                if (txt <= 0 || txt > 255)
                 {
                     MessageBox.Show("Please insert a value in range 1 - 255", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
@@ -1391,7 +1349,7 @@ namespace ProcessamentoDeImagens
                 try
                 {
                     verifyImage(imgR);
-                    imgR = divImage(imgR, double.Parse(txt));
+                    imgR = divImage(imgR, Convert.ToDecimal(txt));
                     pbResult.Image = imgR;
                 }
                 catch (Exception ex)
@@ -1408,8 +1366,9 @@ namespace ProcessamentoDeImagens
 
         private void btnMult_Click(object sender, EventArgs e)
         {
-            string txt = txtMultR.Text;
-            if (txt == "")
+            decimal txt = txtMultR.Value;
+
+            if (txt == 0)
             {
                 try
                 {
@@ -1428,12 +1387,7 @@ namespace ProcessamentoDeImagens
                 }
             }
             else {
-                if (!double.TryParse(txt, out double num))
-                {
-                    MessageBox.Show("Only numbers", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                else if (num <= 0 || num > 255)
+                if (txt <= 0 || txt > 255)
                 {
                     MessageBox.Show("Please insert a value in range 1 - 255", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
@@ -1442,7 +1396,7 @@ namespace ProcessamentoDeImagens
                 try
                 {
                     verifyImage(imgR);
-                    imgR = multImage(imgR, double.Parse(txt));
+                    imgR = multImage(imgR, Convert.ToDecimal(txt));
                     pbResult.Image = imgR;
                 }
                 catch (Exception ex)
@@ -1457,18 +1411,15 @@ namespace ProcessamentoDeImagens
 
         private void btnBld_Click(object sender, EventArgs e)
         {
-            string txt = txtBld.Text;
-            if (txt == "")
+            decimal txt = txtBld.Value;
+
+            if (txt == 0)
             {
                 MessageBox.Show("Field Required\nPlease insert a value in range 0.00 - 1.00", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            else if (!double.TryParse(txt, out double num))
-            {
-                MessageBox.Show("Only numbers", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            else if (num < 0 || num > 1)
+           
+            else if (txt < 0 || txt > 1)
             {
                 MessageBox.Show("Please insert a value in range 0.00 - 1.00", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -1478,7 +1429,7 @@ namespace ProcessamentoDeImagens
             {
                 verifyImage(img1);
                 verifyImage(img2);
-                imgR = blendImages(img1, img2, double.Parse(txt));
+                imgR = blendImages(img1, img2,Convert.ToDecimal(txt));
                 pbResult.Image = imgR;
             }
             catch (Exception ex)
@@ -1509,14 +1460,10 @@ namespace ProcessamentoDeImagens
 
         private void btnBinaryR_Click(object sender, EventArgs e)
         {
-            string txt = txtBinR.Text;
-            if (txt == "") txt = "0,5";
-            else if (!double.TryParse(txt, out double num))
-            {
-                MessageBox.Show("Only numbers", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            else if (num <= 0 || num > 1)
+            decimal txt = txtBinR.Value;
+
+
+            if (txt <= 0 || txt > 1)
             {
                 MessageBox.Show("Please insert a value in range 0.0 - 1.0", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -1525,7 +1472,7 @@ namespace ProcessamentoDeImagens
             try
             {
                 verifyImage(imgR);
-                imgR = toBinary(imgR, double.Parse(txt));
+                imgR = toBinary(imgR, txt);
                 pbResult.Image = imgR;
             }
             catch (Exception ex)
@@ -1537,15 +1484,1281 @@ namespace ProcessamentoDeImagens
             }
         }
 
+        private Bitmap medium(Bitmap imgA) {
+
+            Bitmap image1 = imgA;
+
+            if (image1 == null)
+            {
+                MessageBox.Show("Por favor, selecione uma imagem no campo Imagem Resultante");
+                throw new InvalidOperationException("Image not found!");
+            }
+
+            Bitmap imagemCinza = new Bitmap(image1.Width, image1.Height);
+
+            for (int x = 0; x < image1.Width; x++)
+            {
+                for (int y = 0; y < image1.Height; y++)
+                {
+                    Color color1 = ((Bitmap)image1).GetPixel(x, y);
+                    int r = color1.R;
+                    int g = color1.G;
+                    int b = color1.B;
+                    int gray = (r + g + b) / 3;
+
+                    Color novaCor = Color.FromArgb(color1.A, gray, gray, gray);
+                    imagemCinza.SetPixel(x, y, novaCor);
+
+                }
+            }
+
+            int tamanhoVizinhanca = 3;
+
+            Bitmap imagemFiltrada = new Bitmap(imagemCinza.Width, imagemCinza.Height);
+
+            for (int x = 0; x < imagemCinza.Width; x++)
+            {
+                for (int y = 0; y < imagemCinza.Height; y++)
+                {
+                    int[,] vizinhanca = new int[tamanhoVizinhanca, tamanhoVizinhanca];
+                    int soma = 0;
+                    for (int i = 0; i < tamanhoVizinhanca; i++)
+                    {
+                        for (int j = 0; j < tamanhoVizinhanca; j++)
+                        {
+                            int xIndex = x + i - tamanhoVizinhanca / 2;
+                            int yIndex = y + j - tamanhoVizinhanca / 2;
+
+                            if (xIndex < 0)
+                            {
+                                xIndex = 0;
+                            }
+                            if (xIndex >= imagemCinza.Width)
+                            {
+                                xIndex = imagemCinza.Width - 1;
+                            }
+                            if (yIndex < 0)
+                            {
+                                yIndex = 0;
+                            }
+                            if (yIndex >= imagemCinza.Height)
+                            {
+                                yIndex = imagemCinza.Height - 1;
+                            }
+
+                            vizinhanca[i, j] = imagemCinza.GetPixel(xIndex, yIndex).R;
+                            soma += vizinhanca[i, j];
+                        }
+                    }
+                    
+                    int media = soma/(tamanhoVizinhanca* tamanhoVizinhanca);
+
+                    imagemFiltrada.SetPixel(x, y, Color.FromArgb(media, media, media));
+                }
+            }
+            return imagemFiltrada;
+            //imgFinal.Image = imagemFiltrada;
+        }
+
+        private Bitmap min(Bitmap imgA)
+        {
+
+            Bitmap image1 = imgA;
+
+            if (image1 == null)
+            {
+                MessageBox.Show("Por favor, selecione uma imagem no campo Imagem Resultante");
+                throw new InvalidOperationException("Image not found!");
+            }
+
+            Bitmap imagemCinza = new Bitmap(image1.Width, image1.Height);
+
+            for (int x = 0; x < image1.Width; x++)
+            {
+                for (int y = 0; y < image1.Height; y++)
+                {
+                    Color color1 = ((Bitmap)image1).GetPixel(x, y);
+                    int r = color1.R;
+                    int g = color1.G;
+                    int b = color1.B;
+                    int gray = (r + g + b) / 3;
+
+                    Color novaCor = Color.FromArgb(color1.A, gray, gray, gray);
+                    imagemCinza.SetPixel(x, y, novaCor);
+
+                }
+            }
+
+            int tamanhoVizinhanca = 3;
+
+            Bitmap imagemFiltrada = new Bitmap(imagemCinza.Width, imagemCinza.Height);
+
+            for (int x = 0; x < imagemCinza.Width; x++)
+            {
+                for (int y = 0; y < imagemCinza.Height; y++)
+                {
+                    int[,] vizinhanca = new int[tamanhoVizinhanca, tamanhoVizinhanca];
+
+                    int[] array2 = new int[tamanhoVizinhanca * tamanhoVizinhanca];
+                    int pos = 0;
+                    for (int i = 0; i < tamanhoVizinhanca; i++)
+                    {
+                        for (int j = 0; j < tamanhoVizinhanca; j++)
+                        {
+                            int xIndex = x + i - tamanhoVizinhanca / 2;
+                            int yIndex = y + j - tamanhoVizinhanca / 2;
+
+                            if (xIndex < 0)
+                            {
+                                xIndex = 0;
+                            }
+                            if (xIndex >= imagemCinza.Width)
+                            {
+                                xIndex = imagemCinza.Width - 1;
+                            }
+                            if (yIndex < 0)
+                            {
+                                yIndex = 0;
+                            }
+                            if (yIndex >= imagemCinza.Height)
+                            {
+                                yIndex = imagemCinza.Height - 1;
+                            }
+
+                            vizinhanca[i, j] = imagemCinza.GetPixel(xIndex, yIndex).R;
+                            array2[pos] = vizinhanca[i, j];
+                            pos++;
+
+                        }
+                    }
+
+                    int max = array2.Min();
+
+                    imagemFiltrada.SetPixel(x, y, Color.FromArgb(max, max, max));
+                }
+            }
+            return imagemFiltrada;
+            //imgFinal.Image = imagemFiltrada;
+        }
+
+        private Bitmap max(Bitmap imgA)
+        {
+
+            Bitmap image1 = imgA;
+
+            if (image1 == null)
+            {
+                MessageBox.Show("Por favor, selecione uma imagem no campo Imagem Resultante");
+                throw new InvalidOperationException("Image not found!");
+            }
+
+            Bitmap imagemCinza = new Bitmap(image1.Width, image1.Height);
+
+            for (int x = 0; x < image1.Width; x++)
+            {
+                for (int y = 0; y < image1.Height; y++)
+                {
+                    Color color1 = ((Bitmap)image1).GetPixel(x, y);
+                    int r = color1.R;
+                    int g = color1.G;
+                    int b = color1.B;
+                    int gray = (r + g + b) / 3;
+
+                    Color novaCor = Color.FromArgb(color1.A, gray, gray, gray);
+                    imagemCinza.SetPixel(x, y, novaCor);
+
+                }
+            }
+
+            int tamanhoVizinhanca = 3;
+
+            Bitmap imagemFiltrada = new Bitmap(imagemCinza.Width, imagemCinza.Height);
+
+            for (int x = 0; x < imagemCinza.Width; x++)
+            {
+                for (int y = 0; y < imagemCinza.Height; y++)
+                {
+                    int[,] vizinhanca = new int[tamanhoVizinhanca, tamanhoVizinhanca];
+
+                    int[] array2 = new int[tamanhoVizinhanca * tamanhoVizinhanca];
+                    int pos = 0;
+                    for (int i = 0; i < tamanhoVizinhanca; i++)
+                    {
+                        for (int j = 0; j < tamanhoVizinhanca; j++)
+                        {
+                            int xIndex = x + i - tamanhoVizinhanca / 2;
+                            int yIndex = y + j - tamanhoVizinhanca / 2;
+
+                            if (xIndex < 0)
+                            {
+                                xIndex = 0;
+                            }
+                            if (xIndex >= imagemCinza.Width)
+                            {
+                                xIndex = imagemCinza.Width - 1;
+                            }
+                            if (yIndex < 0)
+                            {
+                                yIndex = 0;
+                            }
+                            if (yIndex >= imagemCinza.Height)
+                            {
+                                yIndex = imagemCinza.Height - 1;
+                            }
+
+                            vizinhanca[i, j] = imagemCinza.GetPixel(xIndex, yIndex).R;
+                            array2[pos] = vizinhanca[i, j];
+                            pos++;
+
+                        }
+                    }
+
+                    int max = array2.Max();
+                 
+                    imagemFiltrada.SetPixel(x, y, Color.FromArgb(max, max, max));
+                }
+            }
+            return imagemFiltrada;
+            //imgFinal.Image = imagemFiltrada;
+        }
+
+        private void btnMax_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                verifyImage(imgR);
+                imgR = toGray(imgR);
+                imgR = max(imgR);
+                pbResult.Image = imgR;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,
+                    "Error HightLight images",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnMin_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                verifyImage(imgR);
+                imgR = toGray(imgR);
+                imgR = min(imgR);
+                pbResult.Image = imgR;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,
+                    "Error HightLight images",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+        private Bitmap median(Bitmap imgA)
+        {
+
+            Bitmap image1 = imgA;
+
+            if (image1 == null)
+            {
+                MessageBox.Show("Por favor, selecione uma imagem no campo Imagem Resultante");
+                throw new InvalidOperationException("Image not found!");
+            }
+
+            Bitmap imagemCinza = new Bitmap(image1.Width, image1.Height);
+
+            for (int x = 0; x < image1.Width; x++)
+            {
+                for (int y = 0; y < image1.Height; y++)
+                {
+                    Color color1 = ((Bitmap)image1).GetPixel(x, y);
+                    int r = color1.R;
+                    int g = color1.G;
+                    int b = color1.B;
+                    int gray = (r + g + b) / 3;
+
+                    Color novaCor = Color.FromArgb(color1.A, gray, gray, gray);
+                    imagemCinza.SetPixel(x, y, novaCor);
+
+                }
+            }
+
+            int tamanhoVizinhanca = 3;
+
+            Bitmap imagemFiltrada = new Bitmap(imagemCinza.Width, imagemCinza.Height);
+
+            for (int x = 0; x < imagemCinza.Width; x++)
+            {
+                for (int y = 0; y < imagemCinza.Height; y++)
+                {
+                    int[,] vizinhanca = new int[tamanhoVizinhanca, tamanhoVizinhanca];
+
+                    int[] array2 = new int[tamanhoVizinhanca * tamanhoVizinhanca];
+                    int pos = 0;
+                    for (int i = 0; i < tamanhoVizinhanca; i++)
+                    {
+                        for (int j = 0; j < tamanhoVizinhanca; j++)
+                        {
+                            int xIndex = x + i - tamanhoVizinhanca / 2;
+                            int yIndex = y + j - tamanhoVizinhanca / 2;
+
+                            if (xIndex < 0)
+                            {
+                                xIndex = 0;
+                            }
+                            if (xIndex >= imagemCinza.Width)
+                            {
+                                xIndex = imagemCinza.Width - 1;
+                            }
+                            if (yIndex < 0)
+                            {
+                                yIndex = 0;
+                            }
+                            if (yIndex >= imagemCinza.Height)
+                            {
+                                yIndex = imagemCinza.Height - 1;
+                            }
+
+                            vizinhanca[i, j] = imagemCinza.GetPixel(xIndex, yIndex).R;
+                            array2[pos] = vizinhanca[i, j];
+                            pos++;
+
+                        }
+                    }
+
+                    Array.Sort(array2);
+                    int medium = array2[5];
+
+                    imagemFiltrada.SetPixel(x, y, Color.FromArgb(medium, medium, medium));
+                }
+            }
+            return imagemFiltrada;
+            //imgFinal.Image = imagemFiltrada;
+        }
+
+        private void btnMedian_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                verifyImage(imgR);
+                imgR = toGray(imgR);
+                imgR = median(imgR);
+                pbResult.Image = imgR;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,
+                    "Error HightLight images",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
+        private Bitmap order(Bitmap imgA, int order)
+        {
+
+            Bitmap image1 = imgA;
+
+            if (image1 == null)
+            {
+                MessageBox.Show("Por favor, selecione uma imagem no campo Imagem Resultante");
+                throw new InvalidOperationException("Image not found!");
+            }
+
+            Bitmap imagemCinza = new Bitmap(image1.Width, image1.Height);
+
+            for (int x = 0; x < image1.Width; x++)
+            {
+                for (int y = 0; y < image1.Height; y++)
+                {
+                    Color color1 = ((Bitmap)image1).GetPixel(x, y);
+                    int r = color1.R;
+                    int g = color1.G;
+                    int b = color1.B;
+                    int gray = (r + g + b) / 3;
+
+                    Color novaCor = Color.FromArgb(color1.A, gray, gray, gray);
+                    imagemCinza.SetPixel(x, y, novaCor);
+
+                }
+            }
+
+            int tamanhoVizinhanca = 3;
+
+            Bitmap imagemFiltrada = new Bitmap(imagemCinza.Width, imagemCinza.Height);
+
+            for (int x = 0; x < imagemCinza.Width; x++)
+            {
+                for (int y = 0; y < imagemCinza.Height; y++)
+                {
+                    int[,] vizinhanca = new int[tamanhoVizinhanca, tamanhoVizinhanca];
+
+                    int[] array2 = new int[tamanhoVizinhanca * tamanhoVizinhanca];
+                    int pos = 0;
+                    for (int i = 0; i < tamanhoVizinhanca; i++)
+                    {
+                        for (int j = 0; j < tamanhoVizinhanca; j++)
+                        {
+                            int xIndex = x + i - tamanhoVizinhanca / 2;
+                            int yIndex = y + j - tamanhoVizinhanca / 2;
+
+                            if (xIndex < 0)
+                            {
+                                xIndex = 0;
+                            }
+                            if (xIndex >= imagemCinza.Width)
+                            {
+                                xIndex = imagemCinza.Width - 1;
+                            }
+                            if (yIndex < 0)
+                            {
+                                yIndex = 0;
+                            }
+                            if (yIndex >= imagemCinza.Height)
+                            {
+                                yIndex = imagemCinza.Height - 1;
+                            }
+
+                            vizinhanca[i, j] = imagemCinza.GetPixel(xIndex, yIndex).R;
+                            array2[pos] = vizinhanca[i, j];
+                            pos++;
+
+                        }
+                    }
+
+                    Array.Sort(array2);
+                   
+                    int medium = array2[order];
+
+                    imagemFiltrada.SetPixel(x, y, Color.FromArgb(medium, medium, medium));
+                }
+            }
+            return imagemFiltrada;
+            //imgFinal.Image = imagemFiltrada;
+        }
+
+        private void btnOrder_Click(object sender, EventArgs e)
+        {
+            decimal txt = txtOrder.Value;
+            if (txt <= 0 || txt > 8)
+            {
+                MessageBox.Show("Please insert a value in range 0 - 8", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            try
+            {
+                verifyImage(imgR);
+                imgR = toGray(imgR);
+                imgR = order(imgR, Convert.ToInt32(txt));
+                pbResult.Image = imgR;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,
+                    "Error HightLight images",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
+        private Bitmap conservative(Bitmap imgA)
+        {
+
+            Bitmap image1 = imgA;
+
+            if (image1 == null)
+            {
+                MessageBox.Show("Por favor, selecione uma imagem no campo Imagem Resultante");
+                throw new InvalidOperationException("Image not found!");
+            }
+
+            Bitmap imagemCinza = new Bitmap(image1.Width, image1.Height);
+
+            for (int x = 0; x < image1.Width; x++)
+            {
+                for (int y = 0; y < image1.Height; y++)
+                {
+                    Color color1 = ((Bitmap)image1).GetPixel(x, y);
+                    int r = color1.R;
+                    int g = color1.G;
+                    int b = color1.B;
+                    int gray = (r + g + b) / 3;
+
+                    Color novaCor = Color.FromArgb(color1.A, gray, gray, gray);
+                    imagemCinza.SetPixel(x, y, novaCor);
+
+                }
+            }
+
+            int tamanhoVizinhanca = 3;
+            int pixelCentral = 0;
+
+            Bitmap imagemFiltrada = new Bitmap(imagemCinza.Width, imagemCinza.Height);
+
+            for (int x = 0; x < imagemCinza.Width; x++)
+            {
+                for (int y = 0; y < imagemCinza.Height; y++)
+                {
+                    int[,] vizinhanca = new int[tamanhoVizinhanca, tamanhoVizinhanca];
+                    int soma = 0;
+                    int[] array2 = new int[(tamanhoVizinhanca * tamanhoVizinhanca)-1];
+                    int pos = 0;
+                    for (int i = 0; i < tamanhoVizinhanca; i++)
+                    {
+                        for (int j = 0; j < tamanhoVizinhanca; j++)
+                        {
+                            int xIndex = x + i - tamanhoVizinhanca / 2;
+                            int yIndex = y + j - tamanhoVizinhanca / 2;
+
+                            if (xIndex < 0)
+                            {
+                                xIndex = 0;
+                            }
+                            if (xIndex >= imagemCinza.Width)
+                            {
+                                xIndex = imagemCinza.Width - 1;
+                            }
+                            if (yIndex < 0)
+                            {
+                                yIndex = 0;
+                            }
+                            if (yIndex >= imagemCinza.Height)
+                            {
+                                yIndex = imagemCinza.Height - 1;
+                            }
+
+                            vizinhanca[i, j] = imagemCinza.GetPixel(xIndex, yIndex).R;
+                            pixelCentral = vizinhanca[1, 1];
+
+                            if (j != 1 || i != 1)
+                            {
+                                array2[pos] = vizinhanca[i, j];
+                                soma += vizinhanca[i, j];
+                                pos++;
+                            }
+                        }
+                    }
+
+                
+
+                int max = array2.Max();
+                int min = array2.Min();
+
+                if (pixelCentral > max )
+                {
+                pixelCentral = max;
+                }
+                else if (pixelCentral < min)
+                {
+                pixelCentral = min;
+                }
+
+                imagemFiltrada.SetPixel(x, y, Color.FromArgb(pixelCentral, pixelCentral, pixelCentral));
+                }
+            }
+            return imagemFiltrada;
+            //imgFinal.Image = imagemFiltrada;
+        }
+
+        private void btnConservative_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                verifyImage(imgR);
+                imgR = toGray(imgR);
+                imgR = conservative(imgR);
+                pbResult.Image = imgR;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,
+                    "Error HightLight images",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
+        private void txtAddR_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private Bitmap gaussian(Bitmap imgA, double sigma)
+        {
+
+            Bitmap imagemCinza = imgA;
+
+            if (imagemCinza == null)
+            {
+                MessageBox.Show("Por favor, selecione uma imagem no campo Imagem Resultante");
+                throw new InvalidOperationException("Image not found!");
+            }
+
+
+
+            int tamanhoVizinhanca = 3;
+            double[] arrayGaussian = new double[tamanhoVizinhanca * tamanhoVizinhanca];
+            int posGau = 0;
+            for (int i = 0; i < tamanhoVizinhanca; i++)
+            {
+                for (int j = 0; j < tamanhoVizinhanca; j++)
+                {
+                    double numerador = 1 / (2 * Math.PI * Math.Pow(sigma, 2));
+                    double expoente = (Math.Pow(i, 2) + Math.Pow(j, 2)) / (2 * Math.Pow(sigma, 2));
+
+                    arrayGaussian[posGau] = Math.Pow(numerador, - expoente);
+                    posGau++;
+                }
+            }
+
+            //txtGuales.Text = Convert.ToString(arrayGaussian[8]);
+
+            Bitmap imagemFiltrada = new Bitmap(imagemCinza.Width, imagemCinza.Height);
+
+            for (int x = 0; x < imagemCinza.Width; x++)
+            {
+                for (int y = 0; y < imagemCinza.Height; y++)
+                {
+                    int[,] vizinhanca = new int[tamanhoVizinhanca, tamanhoVizinhanca];
+
+                    int[] array2 = new int[tamanhoVizinhanca * tamanhoVizinhanca];
+                    int pos = 0;
+                    for (int i = 0; i < tamanhoVizinhanca; i++)
+                    {
+                        for (int j = 0; j < tamanhoVizinhanca; j++)
+                        {
+                            int xIndex = x + i - tamanhoVizinhanca / 2;
+                            int yIndex = y + j - tamanhoVizinhanca / 2;
+
+                            if (xIndex < 0)
+                            {
+                                xIndex = 0;
+                            }
+                            if (xIndex >= imagemCinza.Width)
+                            {
+                                xIndex = imagemCinza.Width - 1;
+                            }
+                            if (yIndex < 0)
+                            {
+                                yIndex = 0;
+                            }
+                            if (yIndex >= imagemCinza.Height)
+                            {
+                                yIndex = imagemCinza.Height - 1;
+                            }
+
+                            vizinhanca[i, j] = imagemCinza.GetPixel(xIndex, yIndex).R;
+                            array2[pos] = vizinhanca[i, j];
+                            pos++;
+
+                        }
+                    }
+
+                    Array.Sort(array2);
+                    int medium = array2[5];
+
+                    imagemFiltrada.SetPixel(x, y, Color.FromArgb(medium, medium, medium));
+                }
+            }
+            return imagemFiltrada;
+            //imgFinal.Image = imagemFiltrada;
+        }
+
+        private double GetGaussian(int[,] vizi, double sigma)
+        {
+            double soma = 0;
+
+            int size = vizi.GetLength(0);
+
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    int valorPixel = vizi[i, j];
+                    double exponente = -(i * i + j * j) / (2 * sigma * sigma);
+                    double peso = Math.Exp(exponente) / (2 * Math.PI * sigma * sigma);
+                    soma += valorPixel * peso;
+                }
+            }
+            return soma;
+        }
+
+
+
+
+
+
+
+        private void btnGaussian_Click(object sender, EventArgs e)
+        {
+            decimal txt = nupGaussiana.Value;
+            try
+            {
+                verifyImage(imgR);
+                imgR = toGray(imgR);
+                imgR = gaussian(imgR, Convert.ToDouble(txt));
+                // pbResult.Image = imgR;
+
+
+
+
+                int tamanhoVizinhanca = 5;
+                double sigma = (double)nupGaussiana.Value;
+
+                Bitmap imagemFiltrada = new Bitmap(imgR.Width, imgR.Height);
+
+                for (int x = 0; x < imgR.Width; x++)
+                {
+                    for (int y = 0; y < imgR.Height; y++)
+                    {
+                        int[,] vizinhanca = new int[tamanhoVizinhanca, tamanhoVizinhanca];
+                        for (int i = 0; i < tamanhoVizinhanca; i++)
+                        {
+                            for (int j = 0; j < tamanhoVizinhanca; j++)
+                            {
+                                int xIndex = x + i - tamanhoVizinhanca / 2;
+                                int yIndex = y + j - tamanhoVizinhanca / 2;
+
+                                if (xIndex < 0)
+                                {
+                                    xIndex = 0;
+                                }
+                                if (xIndex >= imgR.Width)
+                                {
+                                    xIndex = imgR.Width - 1;
+                                }
+                                if (yIndex < 0)
+                                {
+                                    yIndex = 0;
+                                }
+                                if (yIndex >= imgR.Height)
+                                {
+                                    yIndex = imgR.Height - 1;
+                                }
+
+                                vizinhanca[i, j] = imgR.GetPixel(xIndex, yIndex).R;
+                            }
+                        }
+
+                        double gaussian = GetGaussian(vizinhanca, sigma);
+
+                        int pixelNovo = (int)Math.Round(gaussian);
+                        if (pixelNovo < 0) pixelNovo = 0;
+                        else if (pixelNovo > 255) pixelNovo = 255;
+                        Color imagemNova = Color.FromArgb(pixelNovo, pixelNovo, pixelNovo);
+                        imagemFiltrada.SetPixel(x, y, imagemNova);
+                    }
+                }
+                pbResult.Image = imagemFiltrada;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,
+                    "Error Gaussian images",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
+
+        public Bitmap GrayScaleImage(Bitmap image)
+        {
+            if (image == null)
+                throw new ArgumentNullException("image");
+
+            // lock the bitmap.
+            var data = image.LockBits(
+                          new Rectangle(0, 0, image.Width, image.Height),
+                          ImageLockMode.ReadWrite, image.PixelFormat);
+            try
+            {
+                unsafe
+                {
+                    // get a pointer to the data.
+                    byte* ptr = (byte*)data.Scan0;
+
+                    // loop over all the data.
+                    for (int i = 0; i < data.Height; i++)
+                    {
+                        for (int j = 0; j < data.Width; j++)
+                        {
+                            // calculate the gray value.
+                            byte y = (byte)(
+                                (0.299 * ptr[2]) +
+                                (0.587 * ptr[1]) +
+                                (0.114 * ptr[0]));
+
+                            // set the gray value.
+                            ptr[0] = ptr[1] = ptr[2] = y;
+
+                            // increment the pointer.
+                            ptr += 3;
+                        }
+
+                        // move on to the next line.
+                        ptr += data.Stride - data.Width * 3;
+                    }
+                }
+            }
+            finally
+            {
+                // unlock the bits when done or when 
+                // an exception has been thrown.
+                image.UnlockBits(data);
+               
+            }
+            return image;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                verifyImage(imgR);
+                //imgR = toGray(imgR);
+                imgR = GrayScaleImage(imgR);
+                pbResult.Image = imgR;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,
+                    "Error HightLight images",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
+
+        public class ImageTools
+        {
+            public class ExposedBitmap
+            {
+                public PinnedByteArray pinnedArray;
+                public Bitmap exBitmap;
+
+                public readonly PixelFormat pixelFormat;
+                public readonly int bytesPerPixel;
+                public readonly int stride;
+                public readonly int Height;
+                public readonly int Width;
+
+                private int horizontalCoords = -1;
+                private int verticalCoords = -1;
+                private int horizontalLoc = 0;
+                private int verticalLoc = 0;
+                private int location = 0;
+
+                public void GetPixel(int x, int y, out byte red, out byte green, out byte blue)
+                {
+                    if (x == horizontalCoords && y == verticalCoords)
+                    {
+                        blue = pinnedArray.bytes[location];
+                        green = pinnedArray.bytes[location + 1];
+                        red = pinnedArray.bytes[location + 2];
+                        return;
+                    }
+                    else
+                    {
+                        if (x != horizontalCoords)
+                        {
+                            horizontalCoords = x;
+                            horizontalLoc = horizontalCoords * bytesPerPixel;
+                        }
+
+                        if (y != verticalCoords)
+                        {
+                            verticalCoords = y;
+                            verticalLoc = verticalCoords * stride;
+                        }
+
+                        location = verticalLoc + horizontalLoc;
+                    }
+
+                    blue = pinnedArray.bytes[location];
+                    green = pinnedArray.bytes[location + 1];
+                    red = pinnedArray.bytes[location + 2];
+                }
+
+                public void SetPixel(int x, int y, byte red, byte green, byte blue)
+                {
+                    if (x == horizontalCoords && y == verticalCoords)
+                    {
+                        pinnedArray.bytes[location] = blue;
+                        pinnedArray.bytes[location + 1] = green;
+                        pinnedArray.bytes[location + 2] = red;
+                        return;
+                    }
+                    else
+                    {
+                        if (x != horizontalCoords)
+                        {
+                            horizontalCoords = x;
+                            horizontalLoc = horizontalCoords * bytesPerPixel;
+                        }
+
+                        if (y != verticalCoords)
+                        {
+                            verticalCoords = y;
+                            verticalLoc = verticalCoords * stride;
+                        }
+
+                        location = verticalLoc + horizontalLoc;
+                    }
+
+                    pinnedArray.bytes[location] = blue;
+                    pinnedArray.bytes[location + 1] = green;
+                    pinnedArray.bytes[location + 2] = red;
+                }
+
+                public byte GetRed(int x, int y)
+                {
+                    if (x == horizontalCoords && y == verticalCoords)
+                    {
+                        return pinnedArray.bytes[location + 2];
+                    }
+                    else
+                    {
+                        if (x != horizontalCoords)
+                        {
+                            horizontalCoords = x;
+                            horizontalLoc = horizontalCoords * bytesPerPixel;
+                        }
+
+                        if (y != verticalCoords)
+                        {
+                            verticalCoords = y;
+                            verticalLoc = verticalCoords * stride;
+                        }
+
+                        location = verticalLoc + horizontalLoc;
+                    }
+
+                    return pinnedArray.bytes[location + 2];
+                }
+
+                public byte GetGreen(int x, int y)
+                {
+                    if (x == horizontalCoords && y == verticalCoords)
+                    {
+                        return pinnedArray.bytes[location + 1];
+                    }
+                    else
+                    {
+                        if (x != horizontalCoords)
+                        {
+                            horizontalCoords = x;
+                            horizontalLoc = horizontalCoords * bytesPerPixel;
+                        }
+
+                        if (y != verticalCoords)
+                        {
+                            verticalCoords = y;
+                            verticalLoc = verticalCoords * stride;
+                        }
+
+                        location = verticalLoc + horizontalLoc;
+                    }
+
+                    return pinnedArray.bytes[location + 1];
+                }
+
+                public byte GetBlue(int x, int y)
+                {
+                    if (x == horizontalCoords && y == verticalCoords)
+                    {
+                        return pinnedArray.bytes[location];
+                    }
+                    else
+                    {
+                        if (x != horizontalCoords)
+                        {
+                            horizontalCoords = x;
+                            horizontalLoc = horizontalCoords * bytesPerPixel;
+                        }
+
+                        if (y != verticalCoords)
+                        {
+                            verticalCoords = y;
+                            verticalLoc = verticalCoords * stride;
+                        }
+
+                        location = verticalLoc + horizontalLoc;
+                    }
+
+                    return pinnedArray.bytes[location];
+                }
+
+                public void SetRed(int x, int y, Byte byt)
+                {
+                    if (x == horizontalCoords && y == verticalCoords)
+                    {
+                        pinnedArray.bytes[location + 2] = byt;
+                        return;
+                    }
+                    else
+                    {
+                        if (x != horizontalCoords)
+                        {
+                            horizontalCoords = x;
+                            horizontalLoc = horizontalCoords * bytesPerPixel;
+                        }
+
+                        if (y != verticalCoords)
+                        {
+                            verticalCoords = y;
+                            verticalLoc = verticalCoords * stride;
+                        }
+
+                        location = verticalLoc + horizontalLoc;
+                    }
+
+                    pinnedArray.bytes[location + 2] = byt;
+                }
+
+                public void SetGreen(int x, int y, Byte byt)
+                {
+                    if (x == horizontalCoords && y == verticalCoords)
+                    {
+                        pinnedArray.bytes[location + 1] = byt;
+                        return;
+                    }
+                    else
+                    {
+                        if (x != horizontalCoords)
+                        {
+                            horizontalCoords = x;
+                            horizontalLoc = horizontalCoords * bytesPerPixel;
+                        }
+
+                        if (y != verticalCoords)
+                        {
+                            verticalCoords = y;
+                            verticalLoc = verticalCoords * stride;
+                        }
+
+                        location = verticalLoc + horizontalLoc;
+                    }
+
+                    pinnedArray.bytes[location + 1] = byt;
+                }
+
+                public void SetBlue(int x, int y, Byte byt)
+                {
+                    if (x == horizontalCoords && y == verticalCoords)
+                    {
+                        pinnedArray.bytes[location] = byt;
+                        return;
+                    }
+                    else
+                    {
+                        if (x != horizontalCoords)
+                        {
+                            horizontalCoords = x;
+                            horizontalLoc = horizontalCoords * bytesPerPixel;
+                        }
+
+                        if (y != verticalCoords)
+                        {
+                            verticalCoords = y;
+                            verticalLoc = verticalCoords * stride;
+                        }
+
+                        location = verticalLoc + horizontalLoc;
+                    }
+
+                    pinnedArray.bytes[location] = byt;
+                }
+
+                public class PinnedByteArray
+                {
+                    public byte[] bytes;
+                    internal GCHandle handle;
+                    internal IntPtr ptr;
+                    private int referenceCount;
+                    private bool destroyed;
+
+                    public PinnedByteArray(int length)
+                    {
+                        bytes = new byte[length];
+                        handle = GCHandle.Alloc(bytes, GCHandleType.Pinned);
+                        ptr = Marshal.UnsafeAddrOfPinnedArrayElement(bytes, 0);
+                        referenceCount++;
+                    }
+
+                    internal void AddReference()
+                    {
+                        referenceCount++;
+                    }
+
+                    internal void ReleaseReference()
+                    {
+                        referenceCount--;
+                        if (referenceCount <= 0) Destroy();
+                    }
+
+                    private void Destroy()
+                    {
+                        if (!destroyed)
+                        {
+                            handle.Free();
+                            bytes = null;
+                            destroyed = true;
+                        }
+                    }
+
+                    ~PinnedByteArray()
+                    {
+                        Destroy();
+                    }
+                }
+
+                public ExposedBitmap(ref Bitmap sourceBmp)
+                {
+                    // Get the basic info from sourceBmp and store it locally (improves performance)
+                    Height = sourceBmp.Height;
+                    Width = sourceBmp.Width;
+                    pixelFormat = sourceBmp.PixelFormat;
+
+                    // Create exBitmap, associating it with our pinned array so we can access the bitmap bits directly:
+                    bytesPerPixel = System.Drawing.Image.GetPixelFormatSize(pixelFormat) / 8;
+                    stride = Width * bytesPerPixel;
+                    pinnedArray = new PinnedByteArray(stride * Height);
+                    exBitmap = new Bitmap(Width, Height, stride, pixelFormat, pinnedArray.ptr);
+
+                    // Copy the image from sourceBmp to exBitmap:
+                    Graphics g = Graphics.FromImage(exBitmap);
+                    g.DrawImage(sourceBmp, 0, 0, Width, Height);
+                    g.Dispose();
+                }
+            }
+
+            public static Bitmap Blur(ref Bitmap image)
+            {
+                return Blur(ref image, new Rectangle(0, 0, image.Width, image.Height), 2);
+            }
+
+            public static Bitmap Blur(ref Bitmap image, Int32 blurSize)
+            {
+                return Blur(ref image, new Rectangle(0, 0, image.Width, image.Height), blurSize);
+            }
+
+            private static Bitmap Blur(ref Bitmap image, Rectangle rectangle, Int32 blurSize)
+            {
+                ExposedBitmap blurred = new ExposedBitmap(ref image);
+
+                // Armazenagem da altura e largura localmente (melhora o desempenho)
+                int height = blurred.Height;
+                int width = blurred.Width;
+
+                for (int xx = rectangle.X; xx < rectangle.X + rectangle.Width; xx++)
+                {
+                    for (int yy = rectangle.Y; yy < rectangle.Y + rectangle.Height; yy++)
+                    {
+                        //byte red, green, blue;
+                        int avgR = 0, avgG = 0, avgB = 0;
+                        int blurPixelCount = 0;
+                        int horizontalLocation;
+                        int verticalLocation;
+                        int pixelPointer;
+
+                        // Média da cor do vermelho, verde e azul para cada pixel no
+                        // tamanho do desfoque, verificando de não sair do tamanho da imagem:
+                        for (int x = xx; (x < xx + blurSize && x < width); x++)
+                        {
+                            horizontalLocation = x * blurred.bytesPerPixel;
+                            for (int y = yy; (y < yy + blurSize && y < height); y++)
+                            {
+                                verticalLocation = y * blurred.stride;
+                                pixelPointer = verticalLocation + horizontalLocation;
+
+                                avgB += blurred.pinnedArray.bytes[pixelPointer];
+                                avgG += blurred.pinnedArray.bytes[pixelPointer + 1];
+                                avgR += blurred.pinnedArray.bytes[pixelPointer + 2];
+
+                                blurPixelCount++;
+                            }
+                        }
+
+                        byte bavgr = (byte)(avgR / blurPixelCount);
+                        byte bavgg = (byte)(avgG / blurPixelCount);
+                        byte bavgb = (byte)(avgB / blurPixelCount);
+
+                        // Depois de saber a média do tamanho do desfoque, é definido essa cor para cada pixel
+                        for (int x = xx; x < xx + blurSize && x < width && x < rectangle.Width; x++)
+                        {
+                            horizontalLocation = x * blurred.bytesPerPixel;
+                            for (int y = yy; y < yy + blurSize && y < height && y < rectangle.Height; y++)
+                            {
+                                verticalLocation = y * blurred.stride;
+                                pixelPointer = verticalLocation + horizontalLocation;
+
+                                blurred.pinnedArray.bytes[pixelPointer] = bavgb;
+                                blurred.pinnedArray.bytes[pixelPointer + 1] = bavgg;
+                                blurred.pinnedArray.bytes[pixelPointer + 2] = bavgr;
+                            }
+                        }
+                    }
+                }
+
+                image = blurred.exBitmap;
+                return image;
+            }
+        }
+
+
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            int txt = Convert.ToInt32(txtFastGuassian.Value);
+            try
+            {
+                verifyImage(imgR);
+                //imgR = toGray(imgR);
+                imgR = ImageTools.Blur(ref imgR, txt);
+                //imgR = Blur(ref yourBitmap, intBlurSide);
+
+                pbResult.Image = imgR;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,
+                    "Error HightLight images",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnMedium_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                verifyImage(imgR);
+                imgR = toGray(imgR);
+                imgR = medium(imgR);
+                pbResult.Image = imgR;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,
+                    "Error HightLight images",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
             var filePath = string.Empty;
             openFileDialog1.InitialDirectory = "C:\\MatLab";
             openFileDialog1.Filter = "TIFF image (*.tif)|*.tif" +
+                "|All files (*.*)|*.*" +
                 "|JPG image (*.jpg)|*.jpg" +
                 "|BMP image (*.bmp)|*.bmp" +
-                "|PNG image (*.png)|*.png" +
-                "|All files (*.*)|*.*";
+                "|PNG image (*.png)|*.png"
+             ;
             openFileDialog1.FilterIndex = 2;
             openFileDialog1.RestoreDirectory = true;
 
@@ -1576,6 +2789,9 @@ namespace ProcessamentoDeImagens
             }
         }
 
+
+      
+     
         private void btnAND_Click(object sender, EventArgs e)
         {
             try
@@ -1739,26 +2955,6 @@ namespace ProcessamentoDeImagens
             return 0;
         }
 
-        private int minValue(int[] hist)
-        {
-            for (int i = 0; i <= (hist.Length - 1); i++)
-            {
-                if (hist[i] != 0)
-                    return i;
-            }
-            return 0;
-        }
-
-        private int mediumValue(int[] hist)
-        {
-            int soma = 0;
-            for (int i = 0; i <= (hist.Length - 1); i++)
-            {
-                    soma += hist[i];
-            }
-            return soma / (hist.Length - 1);
-        }
-
 
         private void gerarGraficoHistogramaEq(string canal)
         {
@@ -1820,12 +3016,8 @@ namespace ProcessamentoDeImagens
             //Calcula mapa de cores
             int[] mapaCores = new int[256];
 
-            String filter = cbValueFilter.Text;
-            int numberFilter = 0;
-            if (filter == "Max value") numberFilter = maxValue(histogramaR);
-            else if (filter == "Medium value") numberFilter = mediumValue(histogramaR);
-            else if (filter == "Min value") numberFilter = minValue(histogramaR);
-
+            //String filter = cbValueFilter.Text;
+            int numberFilter = maxValue(histogramaR);
 
             for (int i = 0; i < histogramaR.Length; i++)
                 mapaCores[i] = (int)(Math.Round(histAcumuladoR[i] * numberFilter));

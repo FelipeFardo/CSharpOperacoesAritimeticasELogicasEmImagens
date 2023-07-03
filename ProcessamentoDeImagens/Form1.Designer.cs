@@ -28,27 +28,38 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.txtBinA = new System.Windows.Forms.TextBox();
             this.btnA = new System.Windows.Forms.Button();
             this.btnGenA = new System.Windows.Forms.Button();
+            this.txtBinA = new System.Windows.Forms.NumericUpDown();
+            this.txtMultA = new System.Windows.Forms.NumericUpDown();
             this.btnMultA = new System.Windows.Forms.Button();
+            this.txtDivA = new System.Windows.Forms.NumericUpDown();
             this.btnNegaA = new System.Windows.Forms.Button();
             this.btnMirrorA = new System.Windows.Forms.Button();
-            this.txtDivA = new System.Windows.Forms.TextBox();
             this.bntDivA = new System.Windows.Forms.Button();
-            this.txtMultA = new System.Windows.Forms.TextBox();
             this.btnBinaryA = new System.Windows.Forms.Button();
             this.btnGrayA = new System.Windows.Forms.Button();
             this.pbA = new System.Windows.Forms.PictureBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.cbValueFilter = new System.Windows.Forms.ComboBox();
+            this.Filters = new System.Windows.Forms.GroupBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.nupGaussiana = new System.Windows.Forms.NumericUpDown();
+            this.btnGaussian = new System.Windows.Forms.Button();
+            this.txtOrder = new System.Windows.Forms.NumericUpDown();
+            this.btnConservative = new System.Windows.Forms.Button();
+            this.btnOrder = new System.Windows.Forms.Button();
+            this.btnMedian = new System.Windows.Forms.Button();
+            this.btnMedium = new System.Windows.Forms.Button();
+            this.btnMin = new System.Windows.Forms.Button();
+            this.btnMax = new System.Windows.Forms.Button();
             this.bt_hist = new System.Windows.Forms.Button();
             this.btnMirror = new System.Windows.Forms.Button();
             this.btnGenAndSum = new System.Windows.Forms.Button();
@@ -59,12 +70,15 @@
             this.btnXOR = new System.Windows.Forms.Button();
             this.btnAND = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.txtBinR = new System.Windows.Forms.NumericUpDown();
+            this.txtMultR = new System.Windows.Forms.NumericUpDown();
+            this.txtDivR = new System.Windows.Forms.NumericUpDown();
+            this.txtSubR = new System.Windows.Forms.NumericUpDown();
+            this.txtAddR = new System.Windows.Forms.NumericUpDown();
+            this.txtBld = new System.Windows.Forms.NumericUpDown();
+            this.btnBinaryR = new System.Windows.Forms.Button();
+            this.btnGrayR = new System.Windows.Forms.Button();
             this.btnNegative = new System.Windows.Forms.Button();
-            this.txtSubR = new System.Windows.Forms.TextBox();
-            this.txtAddR = new System.Windows.Forms.TextBox();
-            this.txtMultR = new System.Windows.Forms.TextBox();
-            this.txtDivR = new System.Windows.Forms.TextBox();
-            this.txtBld = new System.Windows.Forms.TextBox();
             this.btnDiv = new System.Windows.Forms.Button();
             this.btnBld = new System.Windows.Forms.Button();
             this.btnAvg = new System.Windows.Forms.Button();
@@ -73,43 +87,57 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.txtDivB = new System.Windows.Forms.NumericUpDown();
+            this.txtMultB = new System.Windows.Forms.NumericUpDown();
+            this.txtBinB = new System.Windows.Forms.NumericUpDown();
             this.button2 = new System.Windows.Forms.Button();
-            this.txtBinB = new System.Windows.Forms.TextBox();
             this.btnB = new System.Windows.Forms.Button();
             this.btnGenB = new System.Windows.Forms.Button();
             this.btnDivB = new System.Windows.Forms.Button();
             this.btnNegaB = new System.Windows.Forms.Button();
             this.btnGrayB = new System.Windows.Forms.Button();
-            this.txtMultB = new System.Windows.Forms.TextBox();
             this.btnBinaryB = new System.Windows.Forms.Button();
             this.btnMultB = new System.Windows.Forms.Button();
             this.btnMirrorB = new System.Windows.Forms.Button();
-            this.txtDivB = new System.Windows.Forms.TextBox();
             this.pbB = new System.Windows.Forms.PictureBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.btnExportR = new System.Windows.Forms.Button();
             this.pbResult = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.chart_P_Equalizado = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnGrayR = new System.Windows.Forms.Button();
-            this.txtBinR = new System.Windows.Forms.TextBox();
-            this.btnBinaryR = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.txtFastGuassian = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.groupBox8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBinA)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMultA)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDivA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbA)).BeginInit();
             this.groupBox4.SuspendLayout();
             this.groupBox7.SuspendLayout();
+            this.Filters.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nupGaussiana)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtOrder)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBinR)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMultR)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDivR)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSubR)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAddR)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBld)).BeginInit();
             this.groupBox11.SuspendLayout();
             this.groupBox12.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDivB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMultB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBinB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbB)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbResult)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart_P_Equalizado)).BeginInit();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFastGuassian)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -128,15 +156,15 @@
             // groupBox8
             // 
             this.groupBox8.Controls.Add(this.button1);
-            this.groupBox8.Controls.Add(this.txtBinA);
             this.groupBox8.Controls.Add(this.btnA);
             this.groupBox8.Controls.Add(this.btnGenA);
+            this.groupBox8.Controls.Add(this.txtBinA);
+            this.groupBox8.Controls.Add(this.txtMultA);
             this.groupBox8.Controls.Add(this.btnMultA);
+            this.groupBox8.Controls.Add(this.txtDivA);
             this.groupBox8.Controls.Add(this.btnNegaA);
             this.groupBox8.Controls.Add(this.btnMirrorA);
-            this.groupBox8.Controls.Add(this.txtDivA);
             this.groupBox8.Controls.Add(this.bntDivA);
-            this.groupBox8.Controls.Add(this.txtMultA);
             this.groupBox8.Controls.Add(this.btnBinaryA);
             this.groupBox8.Controls.Add(this.btnGrayA);
             this.groupBox8.Location = new System.Drawing.Point(18, 272);
@@ -157,15 +185,6 @@
             this.button1.Text = "Export Image";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.btnExportA_Click);
-            // 
-            // txtBinA
-            // 
-            this.txtBinA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtBinA.Location = new System.Drawing.Point(121, 79);
-            this.txtBinA.Name = "txtBinA";
-            this.txtBinA.Size = new System.Drawing.Size(72, 20);
-            this.txtBinA.TabIndex = 14;
-            this.txtBinA.Text = "0,1";
             // 
             // btnA
             // 
@@ -189,6 +208,42 @@
             this.btnGenA.UseVisualStyleBackColor = true;
             this.btnGenA.Click += new System.EventHandler(this.btnGenA_Click);
             // 
+            // txtBinA
+            // 
+            this.txtBinA.DecimalPlaces = 2;
+            this.txtBinA.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.txtBinA.Location = new System.Drawing.Point(122, 77);
+            this.txtBinA.Name = "txtBinA";
+            this.txtBinA.Size = new System.Drawing.Size(63, 20);
+            this.txtBinA.TabIndex = 21;
+            this.txtBinA.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            // 
+            // txtMultA
+            // 
+            this.txtMultA.DecimalPlaces = 2;
+            this.txtMultA.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.txtMultA.Location = new System.Drawing.Point(122, 108);
+            this.txtMultA.Name = "txtMultA";
+            this.txtMultA.Size = new System.Drawing.Size(63, 20);
+            this.txtMultA.TabIndex = 22;
+            this.txtMultA.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
             // btnMultA
             // 
             this.btnMultA.Location = new System.Drawing.Point(6, 105);
@@ -198,6 +253,24 @@
             this.btnMultA.Text = "Multiplication";
             this.btnMultA.UseVisualStyleBackColor = true;
             this.btnMultA.Click += new System.EventHandler(this.btnMultA_Click);
+            // 
+            // txtDivA
+            // 
+            this.txtDivA.DecimalPlaces = 2;
+            this.txtDivA.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.txtDivA.Location = new System.Drawing.Point(122, 134);
+            this.txtDivA.Name = "txtDivA";
+            this.txtDivA.Size = new System.Drawing.Size(63, 20);
+            this.txtDivA.TabIndex = 23;
+            this.txtDivA.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
             // 
             // btnNegaA
             // 
@@ -219,15 +292,6 @@
             this.btnMirrorA.UseVisualStyleBackColor = true;
             this.btnMirrorA.Click += new System.EventHandler(this.btnMirrorA_Click);
             // 
-            // txtDivA
-            // 
-            this.txtDivA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtDivA.Location = new System.Drawing.Point(121, 131);
-            this.txtDivA.Name = "txtDivA";
-            this.txtDivA.Size = new System.Drawing.Size(72, 20);
-            this.txtDivA.TabIndex = 7;
-            this.txtDivA.Text = "2";
-            // 
             // bntDivA
             // 
             this.bntDivA.Location = new System.Drawing.Point(6, 134);
@@ -237,15 +301,6 @@
             this.bntDivA.Text = "Division";
             this.bntDivA.UseVisualStyleBackColor = true;
             this.bntDivA.Click += new System.EventHandler(this.btnDivA_Click);
-            // 
-            // txtMultA
-            // 
-            this.txtMultA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtMultA.Location = new System.Drawing.Point(121, 105);
-            this.txtMultA.Name = "txtMultA";
-            this.txtMultA.Size = new System.Drawing.Size(72, 20);
-            this.txtMultA.TabIndex = 11;
-            this.txtMultA.Text = "2";
             // 
             // btnBinaryA
             // 
@@ -285,37 +340,174 @@
             this.groupBox4.Controls.Add(this.groupBox5);
             this.groupBox4.Location = new System.Drawing.Point(12, 494);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(982, 166);
+            this.groupBox4.Size = new System.Drawing.Size(1234, 166);
             this.groupBox4.TabIndex = 6;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Tools";
             // 
             // groupBox7
             // 
-            this.groupBox7.Controls.Add(this.cbValueFilter);
+            this.groupBox7.Controls.Add(this.Filters);
             this.groupBox7.Controls.Add(this.bt_hist);
             this.groupBox7.Controls.Add(this.btnMirror);
             this.groupBox7.Controls.Add(this.btnGenAndSum);
             this.groupBox7.Controls.Add(this.btnColV);
-            this.groupBox7.Location = new System.Drawing.Point(645, 19);
+            this.groupBox7.Location = new System.Drawing.Point(637, 19);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(313, 141);
+            this.groupBox7.Size = new System.Drawing.Size(591, 141);
             this.groupBox7.TabIndex = 6;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "More";
             // 
-            // cbValueFilter
+            // Filters
             // 
-            this.cbValueFilter.FormattingEnabled = true;
-            this.cbValueFilter.Items.AddRange(new object[] {
-            "Max value",
-            "Medium value",
-            "Min value"});
-            this.cbValueFilter.Location = new System.Drawing.Point(188, 23);
-            this.cbValueFilter.Name = "cbValueFilter";
-            this.cbValueFilter.Size = new System.Drawing.Size(95, 21);
-            this.cbValueFilter.TabIndex = 12;
-            this.cbValueFilter.Text = "Max value";
+            this.Filters.Controls.Add(this.txtFastGuassian);
+            this.Filters.Controls.Add(this.button5);
+            this.Filters.Controls.Add(this.button4);
+            this.Filters.Controls.Add(this.nupGaussiana);
+            this.Filters.Controls.Add(this.btnGaussian);
+            this.Filters.Controls.Add(this.txtOrder);
+            this.Filters.Controls.Add(this.btnConservative);
+            this.Filters.Controls.Add(this.btnOrder);
+            this.Filters.Controls.Add(this.btnMedian);
+            this.Filters.Controls.Add(this.btnMedium);
+            this.Filters.Controls.Add(this.btnMin);
+            this.Filters.Controls.Add(this.btnMax);
+            this.Filters.Location = new System.Drawing.Point(199, 16);
+            this.Filters.Name = "Filters";
+            this.Filters.Size = new System.Drawing.Size(386, 119);
+            this.Filters.TabIndex = 11;
+            this.Filters.TabStop = false;
+            this.Filters.Text = "Filters";
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(221, 89);
+            this.button5.Margin = new System.Windows.Forms.Padding(2);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(88, 24);
+            this.button5.TabIndex = 33;
+            this.button5.Text = "Fast Gaussian";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(100, 89);
+            this.button4.Margin = new System.Windows.Forms.Padding(2);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(88, 24);
+            this.button4.TabIndex = 32;
+            this.button4.Text = "Fast Averaging";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // nupGaussiana
+            // 
+            this.nupGaussiana.DecimalPlaces = 2;
+            this.nupGaussiana.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            131072});
+            this.nupGaussiana.Location = new System.Drawing.Point(293, 54);
+            this.nupGaussiana.Name = "nupGaussiana";
+            this.nupGaussiana.Size = new System.Drawing.Size(47, 20);
+            this.nupGaussiana.TabIndex = 31;
+            this.nupGaussiana.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            // 
+            // btnGaussian
+            // 
+            this.btnGaussian.Location = new System.Drawing.Point(221, 53);
+            this.btnGaussian.Margin = new System.Windows.Forms.Padding(2);
+            this.btnGaussian.Name = "btnGaussian";
+            this.btnGaussian.Size = new System.Drawing.Size(67, 24);
+            this.btnGaussian.TabIndex = 21;
+            this.btnGaussian.Text = "Gaussian";
+            this.btnGaussian.UseVisualStyleBackColor = true;
+            this.btnGaussian.Click += new System.EventHandler(this.btnGaussian_Click);
+            // 
+            // txtOrder
+            // 
+            this.txtOrder.Location = new System.Drawing.Point(293, 22);
+            this.txtOrder.Name = "txtOrder";
+            this.txtOrder.Size = new System.Drawing.Size(47, 20);
+            this.txtOrder.TabIndex = 20;
+            this.txtOrder.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // btnConservative
+            // 
+            this.btnConservative.Location = new System.Drawing.Point(100, 53);
+            this.btnConservative.Margin = new System.Windows.Forms.Padding(2);
+            this.btnConservative.Name = "btnConservative";
+            this.btnConservative.Size = new System.Drawing.Size(67, 24);
+            this.btnConservative.TabIndex = 19;
+            this.btnConservative.Text = "Smoothing";
+            this.btnConservative.UseVisualStyleBackColor = true;
+            this.btnConservative.Click += new System.EventHandler(this.btnConservative_Click);
+            // 
+            // btnOrder
+            // 
+            this.btnOrder.Location = new System.Drawing.Point(221, 18);
+            this.btnOrder.Margin = new System.Windows.Forms.Padding(2);
+            this.btnOrder.Name = "btnOrder";
+            this.btnOrder.Size = new System.Drawing.Size(67, 24);
+            this.btnOrder.TabIndex = 18;
+            this.btnOrder.Text = "Order";
+            this.btnOrder.UseVisualStyleBackColor = true;
+            this.btnOrder.Click += new System.EventHandler(this.btnOrder_Click);
+            // 
+            // btnMedian
+            // 
+            this.btnMedian.Location = new System.Drawing.Point(100, 18);
+            this.btnMedian.Margin = new System.Windows.Forms.Padding(2);
+            this.btnMedian.Name = "btnMedian";
+            this.btnMedian.Size = new System.Drawing.Size(67, 24);
+            this.btnMedian.TabIndex = 17;
+            this.btnMedian.Text = "Median";
+            this.btnMedian.UseVisualStyleBackColor = true;
+            this.btnMedian.Click += new System.EventHandler(this.btnMedian_Click);
+            // 
+            // btnMedium
+            // 
+            this.btnMedium.Location = new System.Drawing.Point(10, 89);
+            this.btnMedium.Margin = new System.Windows.Forms.Padding(2);
+            this.btnMedium.Name = "btnMedium";
+            this.btnMedium.Size = new System.Drawing.Size(67, 24);
+            this.btnMedium.TabIndex = 16;
+            this.btnMedium.Text = "Medium";
+            this.btnMedium.UseVisualStyleBackColor = true;
+            this.btnMedium.Click += new System.EventHandler(this.btnMedium_Click);
+            // 
+            // btnMin
+            // 
+            this.btnMin.Location = new System.Drawing.Point(10, 53);
+            this.btnMin.Margin = new System.Windows.Forms.Padding(2);
+            this.btnMin.Name = "btnMin";
+            this.btnMin.Size = new System.Drawing.Size(67, 24);
+            this.btnMin.TabIndex = 15;
+            this.btnMin.Text = "Min";
+            this.btnMin.UseVisualStyleBackColor = true;
+            this.btnMin.Click += new System.EventHandler(this.btnMin_Click);
+            // 
+            // btnMax
+            // 
+            this.btnMax.Location = new System.Drawing.Point(10, 18);
+            this.btnMax.Margin = new System.Windows.Forms.Padding(2);
+            this.btnMax.Name = "btnMax";
+            this.btnMax.Size = new System.Drawing.Size(67, 24);
+            this.btnMax.TabIndex = 14;
+            this.btnMax.Text = "Max";
+            this.btnMax.UseVisualStyleBackColor = true;
+            this.btnMax.Click += new System.EventHandler(this.btnMax_Click);
             // 
             // bt_hist
             // 
@@ -324,7 +516,7 @@
             this.bt_hist.Name = "bt_hist";
             this.bt_hist.Size = new System.Drawing.Size(76, 27);
             this.bt_hist.TabIndex = 10;
-            this.bt_hist.Text = "Histograma";
+            this.bt_hist.Text = "Historiogram";
             this.bt_hist.UseVisualStyleBackColor = true;
             this.bt_hist.Click += new System.EventHandler(this.bt_hist_Click);
             // 
@@ -414,14 +606,14 @@
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.txtBinR);
+            this.groupBox5.Controls.Add(this.txtMultR);
+            this.groupBox5.Controls.Add(this.txtDivR);
+            this.groupBox5.Controls.Add(this.txtSubR);
+            this.groupBox5.Controls.Add(this.txtAddR);
+            this.groupBox5.Controls.Add(this.txtBld);
             this.groupBox5.Controls.Add(this.btnBinaryR);
             this.groupBox5.Controls.Add(this.btnGrayR);
             this.groupBox5.Controls.Add(this.btnNegative);
-            this.groupBox5.Controls.Add(this.txtSubR);
-            this.groupBox5.Controls.Add(this.txtAddR);
-            this.groupBox5.Controls.Add(this.txtMultR);
-            this.groupBox5.Controls.Add(this.txtDivR);
-            this.groupBox5.Controls.Add(this.txtBld);
             this.groupBox5.Controls.Add(this.btnDiv);
             this.groupBox5.Controls.Add(this.btnBld);
             this.groupBox5.Controls.Add(this.btnAvg);
@@ -435,6 +627,115 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Arithmetic Operations";
             // 
+            // txtBinR
+            // 
+            this.txtBinR.DecimalPlaces = 2;
+            this.txtBinR.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            131072});
+            this.txtBinR.Location = new System.Drawing.Point(241, 109);
+            this.txtBinR.Name = "txtBinR";
+            this.txtBinR.Size = new System.Drawing.Size(47, 20);
+            this.txtBinR.TabIndex = 30;
+            this.txtBinR.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            // 
+            // txtMultR
+            // 
+            this.txtMultR.DecimalPlaces = 2;
+            this.txtMultR.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            131072});
+            this.txtMultR.Location = new System.Drawing.Point(241, 70);
+            this.txtMultR.Name = "txtMultR";
+            this.txtMultR.Size = new System.Drawing.Size(47, 20);
+            this.txtMultR.TabIndex = 29;
+            // 
+            // txtDivR
+            // 
+            this.txtDivR.DecimalPlaces = 2;
+            this.txtDivR.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            131072});
+            this.txtDivR.Location = new System.Drawing.Point(241, 28);
+            this.txtDivR.Name = "txtDivR";
+            this.txtDivR.Size = new System.Drawing.Size(47, 20);
+            this.txtDivR.TabIndex = 28;
+            // 
+            // txtSubR
+            // 
+            this.txtSubR.DecimalPlaces = 2;
+            this.txtSubR.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            131072});
+            this.txtSubR.Location = new System.Drawing.Point(97, 67);
+            this.txtSubR.Name = "txtSubR";
+            this.txtSubR.Size = new System.Drawing.Size(47, 20);
+            this.txtSubR.TabIndex = 27;
+            // 
+            // txtAddR
+            // 
+            this.txtAddR.DecimalPlaces = 2;
+            this.txtAddR.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            131072});
+            this.txtAddR.Location = new System.Drawing.Point(97, 28);
+            this.txtAddR.Name = "txtAddR";
+            this.txtAddR.Size = new System.Drawing.Size(47, 20);
+            this.txtAddR.TabIndex = 26;
+            this.txtAddR.ValueChanged += new System.EventHandler(this.txtAddR_ValueChanged);
+            // 
+            // txtBld
+            // 
+            this.txtBld.DecimalPlaces = 2;
+            this.txtBld.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            131072});
+            this.txtBld.Location = new System.Drawing.Point(97, 109);
+            this.txtBld.Name = "txtBld";
+            this.txtBld.Size = new System.Drawing.Size(45, 20);
+            this.txtBld.TabIndex = 24;
+            this.txtBld.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            // 
+            // btnBinaryR
+            // 
+            this.btnBinaryR.Location = new System.Drawing.Point(148, 106);
+            this.btnBinaryR.Name = "btnBinaryR";
+            this.btnBinaryR.Size = new System.Drawing.Size(87, 23);
+            this.btnBinaryR.TabIndex = 21;
+            this.btnBinaryR.Text = "To Binary";
+            this.btnBinaryR.UseVisualStyleBackColor = true;
+            this.btnBinaryR.Click += new System.EventHandler(this.btnBinaryR_Click);
+            // 
+            // btnGrayR
+            // 
+            this.btnGrayR.Location = new System.Drawing.Point(299, 106);
+            this.btnGrayR.Name = "btnGrayR";
+            this.btnGrayR.Size = new System.Drawing.Size(85, 23);
+            this.btnGrayR.TabIndex = 20;
+            this.btnGrayR.Text = "To Gray";
+            this.btnGrayR.UseVisualStyleBackColor = true;
+            this.btnGrayR.Click += new System.EventHandler(this.btnGrayR_Click);
+            // 
             // btnNegative
             // 
             this.btnNegative.Location = new System.Drawing.Point(299, 28);
@@ -444,61 +745,6 @@
             this.btnNegative.Text = "Negative";
             this.btnNegative.UseVisualStyleBackColor = true;
             this.btnNegative.Click += new System.EventHandler(this.btnNegative_Click);
-            // 
-            // txtSubR
-            // 
-            this.txtSubR.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSubR.Location = new System.Drawing.Point(97, 67);
-            this.txtSubR.Name = "txtSubR";
-            this.txtSubR.Size = new System.Drawing.Size(48, 20);
-            this.txtSubR.TabIndex = 18;
-            // 
-            // txtAddR
-            // 
-            this.txtAddR.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtAddR.Location = new System.Drawing.Point(96, 31);
-            this.txtAddR.Name = "txtAddR";
-            this.txtAddR.Size = new System.Drawing.Size(48, 20);
-            this.txtAddR.TabIndex = 17;
-            // 
-            // txtMultR
-            // 
-            this.txtMultR.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtMultR.Location = new System.Drawing.Point(241, 70);
-            this.txtMultR.Name = "txtMultR";
-            this.txtMultR.Size = new System.Drawing.Size(48, 20);
-            this.txtMultR.TabIndex = 16;
-            // 
-            // txtDivR
-            // 
-            this.txtDivR.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtDivR.Location = new System.Drawing.Point(241, 31);
-            this.txtDivR.Name = "txtDivR";
-            this.txtDivR.Size = new System.Drawing.Size(48, 20);
-            this.txtDivR.TabIndex = 16;
-            // 
-            // txtBld
-            // 
-            this.txtBld.AutoCompleteCustomSource.AddRange(new string[] {
-            "0",
-            "0.1",
-            "0.2",
-            "0.3",
-            "0.4",
-            "0.5",
-            "0.6",
-            "0.7",
-            "0.8",
-            "0.9",
-            "1"});
-            this.txtBld.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.txtBld.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtBld.Location = new System.Drawing.Point(96, 109);
-            this.txtBld.Name = "txtBld";
-            this.txtBld.Size = new System.Drawing.Size(48, 20);
-            this.txtBld.TabIndex = 9;
-            this.txtBld.Tag = "";
-            this.txtBld.Text = "0,5";
             // 
             // btnDiv
             // 
@@ -532,7 +778,7 @@
             // 
             // btnMult
             // 
-            this.btnMult.Location = new System.Drawing.Point(150, 66);
+            this.btnMult.Location = new System.Drawing.Point(148, 67);
             this.btnMult.Name = "btnMult";
             this.btnMult.Size = new System.Drawing.Size(85, 23);
             this.btnMult.TabIndex = 3;
@@ -575,24 +821,78 @@
             // 
             // groupBox12
             // 
-            this.groupBox12.Controls.Add(this.button2);
+            this.groupBox12.Controls.Add(this.txtDivB);
+            this.groupBox12.Controls.Add(this.txtMultB);
             this.groupBox12.Controls.Add(this.txtBinB);
+            this.groupBox12.Controls.Add(this.button2);
             this.groupBox12.Controls.Add(this.btnB);
             this.groupBox12.Controls.Add(this.btnGenB);
             this.groupBox12.Controls.Add(this.btnDivB);
             this.groupBox12.Controls.Add(this.btnNegaB);
             this.groupBox12.Controls.Add(this.btnGrayB);
-            this.groupBox12.Controls.Add(this.txtMultB);
             this.groupBox12.Controls.Add(this.btnBinaryB);
             this.groupBox12.Controls.Add(this.btnMultB);
             this.groupBox12.Controls.Add(this.btnMirrorB);
-            this.groupBox12.Controls.Add(this.txtDivB);
             this.groupBox12.Location = new System.Drawing.Point(15, 272);
             this.groupBox12.Name = "groupBox12";
             this.groupBox12.Size = new System.Drawing.Size(250, 198);
             this.groupBox12.TabIndex = 14;
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "Edit";
+            // 
+            // txtDivB
+            // 
+            this.txtDivB.DecimalPlaces = 2;
+            this.txtDivB.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.txtDivB.Location = new System.Drawing.Point(126, 137);
+            this.txtDivB.Name = "txtDivB";
+            this.txtDivB.Size = new System.Drawing.Size(63, 20);
+            this.txtDivB.TabIndex = 26;
+            this.txtDivB.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
+            // txtMultB
+            // 
+            this.txtMultB.DecimalPlaces = 2;
+            this.txtMultB.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.txtMultB.Location = new System.Drawing.Point(126, 108);
+            this.txtMultB.Name = "txtMultB";
+            this.txtMultB.Size = new System.Drawing.Size(63, 20);
+            this.txtMultB.TabIndex = 25;
+            this.txtMultB.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
+            // txtBinB
+            // 
+            this.txtBinB.DecimalPlaces = 2;
+            this.txtBinB.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.txtBinB.Location = new System.Drawing.Point(126, 83);
+            this.txtBinB.Name = "txtBinB";
+            this.txtBinB.Size = new System.Drawing.Size(63, 20);
+            this.txtBinB.TabIndex = 24;
+            this.txtBinB.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             // 
             // button2
             // 
@@ -605,15 +905,6 @@
             this.button2.Text = "Export Image";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.btnExportB_Click);
-            // 
-            // txtBinB
-            // 
-            this.txtBinB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtBinB.Location = new System.Drawing.Point(126, 82);
-            this.txtBinB.Name = "txtBinB";
-            this.txtBinB.Size = new System.Drawing.Size(72, 20);
-            this.txtBinB.TabIndex = 15;
-            this.txtBinB.Text = "0,1";
             // 
             // btnB
             // 
@@ -667,15 +958,6 @@
             this.btnGrayB.UseVisualStyleBackColor = true;
             this.btnGrayB.Click += new System.EventHandler(this.btnGrayB_Click);
             // 
-            // txtMultB
-            // 
-            this.txtMultB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtMultB.Location = new System.Drawing.Point(126, 109);
-            this.txtMultB.Name = "txtMultB";
-            this.txtMultB.Size = new System.Drawing.Size(72, 20);
-            this.txtMultB.TabIndex = 18;
-            this.txtMultB.Text = "2";
-            // 
             // btnBinaryB
             // 
             this.btnBinaryB.Location = new System.Drawing.Point(6, 79);
@@ -706,15 +988,6 @@
             this.btnMirrorB.UseVisualStyleBackColor = true;
             this.btnMirrorB.Click += new System.EventHandler(this.btnMirrorB_Click);
             // 
-            // txtDivB
-            // 
-            this.txtDivB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtDivB.Location = new System.Drawing.Point(126, 135);
-            this.txtDivB.Name = "txtDivB";
-            this.txtDivB.Size = new System.Drawing.Size(72, 20);
-            this.txtDivB.TabIndex = 13;
-            this.txtDivB.Text = "2";
-            // 
             // pbB
             // 
             this.pbB.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -739,6 +1012,18 @@
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Result";
+            // 
+            // button3
+            // 
+            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button3.Location = new System.Drawing.Point(15, 275);
+            this.button3.Margin = new System.Windows.Forms.Padding(2);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(110, 23);
+            this.button3.TabIndex = 6;
+            this.button3.Text = "Load Image R";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // btnExportR
             // 
@@ -768,21 +1053,21 @@
             // 
             // chart_P_Equalizado
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chart_P_Equalizado.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chart_P_Equalizado.Legends.Add(legend3);
+            chartArea1.Name = "ChartArea1";
+            this.chart_P_Equalizado.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart_P_Equalizado.Legends.Add(legend1);
             this.chart_P_Equalizado.Location = new System.Drawing.Point(17, 20);
             this.chart_P_Equalizado.Name = "chart_P_Equalizado";
             this.chart_P_Equalizado.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
             this.chart_P_Equalizado.PaletteCustomColors = new System.Drawing.Color[] {
         System.Drawing.Color.Black};
-            series3.ChartArea = "ChartArea1";
-            series3.LabelBackColor = System.Drawing.Color.Transparent;
-            series3.LabelBorderColor = System.Drawing.Color.Transparent;
-            series3.Legend = "Legend1";
-            series3.Name = "Black";
-            this.chart_P_Equalizado.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.LabelBackColor = System.Drawing.Color.Transparent;
+            series1.LabelBorderColor = System.Drawing.Color.Transparent;
+            series1.Legend = "Legend1";
+            series1.Name = "Black";
+            this.chart_P_Equalizado.Series.Add(series1);
             this.chart_P_Equalizado.Size = new System.Drawing.Size(300, 191);
             this.chart_P_Equalizado.TabIndex = 10;
             this.chart_P_Equalizado.Text = "chart1";
@@ -799,46 +1084,18 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Histogram";
             // 
-            // btnGrayR
+            // txtFastGuassian
             // 
-            this.btnGrayR.Location = new System.Drawing.Point(299, 106);
-            this.btnGrayR.Name = "btnGrayR";
-            this.btnGrayR.Size = new System.Drawing.Size(85, 23);
-            this.btnGrayR.TabIndex = 20;
-            this.btnGrayR.Text = "To Gray";
-            this.btnGrayR.UseVisualStyleBackColor = true;
-            this.btnGrayR.Click += new System.EventHandler(this.btnGrayR_Click);
-            // 
-            // txtBinR
-            // 
-            this.txtBinR.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtBinR.Location = new System.Drawing.Point(241, 109);
-            this.txtBinR.Name = "txtBinR";
-            this.txtBinR.Size = new System.Drawing.Size(48, 20);
-            this.txtBinR.TabIndex = 20;
-            this.txtBinR.Text = "0,1";
-            // 
-            // btnBinaryR
-            // 
-            this.btnBinaryR.Location = new System.Drawing.Point(148, 106);
-            this.btnBinaryR.Name = "btnBinaryR";
-            this.btnBinaryR.Size = new System.Drawing.Size(87, 23);
-            this.btnBinaryR.TabIndex = 21;
-            this.btnBinaryR.Text = "To Binary";
-            this.btnBinaryR.UseVisualStyleBackColor = true;
-            this.btnBinaryR.Click += new System.EventHandler(this.btnBinaryR_Click);
-            // 
-            // button3
-            // 
-            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button3.Location = new System.Drawing.Point(15, 275);
-            this.button3.Margin = new System.Windows.Forms.Padding(2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(110, 23);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "Load Image R";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.txtFastGuassian.DecimalPlaces = 2;
+            this.txtFastGuassian.Location = new System.Drawing.Point(314, 89);
+            this.txtFastGuassian.Name = "txtFastGuassian";
+            this.txtFastGuassian.Size = new System.Drawing.Size(47, 20);
+            this.txtFastGuassian.TabIndex = 31;
+            this.txtFastGuassian.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
             // 
             // Form1
             // 
@@ -854,21 +1111,34 @@
             this.Text = "Form1";
             this.groupBox1.ResumeLayout(false);
             this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBinA)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMultA)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDivA)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbA)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
+            this.Filters.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nupGaussiana)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtOrder)).EndInit();
             this.groupBox6.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBinR)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMultR)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDivR)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSubR)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAddR)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBld)).EndInit();
             this.groupBox11.ResumeLayout(false);
             this.groupBox12.ResumeLayout(false);
-            this.groupBox12.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDivB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMultB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBinB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbB)).EndInit();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbResult)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart_P_Equalizado)).EndInit();
             this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtFastGuassian)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -877,14 +1147,11 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.TextBox txtBinA;
         private System.Windows.Forms.Button btnGenA;
         private System.Windows.Forms.Button btnMultA;
         private System.Windows.Forms.Button btnNegaA;
         private System.Windows.Forms.Button btnMirrorA;
-        private System.Windows.Forms.TextBox txtDivA;
         private System.Windows.Forms.Button bntDivA;
-        private System.Windows.Forms.TextBox txtMultA;
         private System.Windows.Forms.Button btnBinaryA;
         private System.Windows.Forms.Button btnGrayA;
         private System.Windows.Forms.PictureBox pbA;
@@ -899,7 +1166,6 @@
         private System.Windows.Forms.Button btnXOR;
         private System.Windows.Forms.Button btnAND;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.TextBox txtBld;
         private System.Windows.Forms.Button btnDiv;
         private System.Windows.Forms.Button btnBld;
         private System.Windows.Forms.Button btnAvg;
@@ -908,16 +1174,13 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.GroupBox groupBox11;
         private System.Windows.Forms.GroupBox groupBox12;
-        private System.Windows.Forms.TextBox txtBinB;
         private System.Windows.Forms.Button btnGenB;
         private System.Windows.Forms.Button btnDivB;
         private System.Windows.Forms.Button btnNegaB;
         private System.Windows.Forms.Button btnGrayB;
-        private System.Windows.Forms.TextBox txtMultB;
         private System.Windows.Forms.Button btnBinaryB;
         private System.Windows.Forms.Button btnMultB;
         private System.Windows.Forms.Button btnMirrorB;
-        private System.Windows.Forms.TextBox txtDivB;
         private System.Windows.Forms.PictureBox pbB;
         private System.Windows.Forms.Button btnB;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -926,20 +1189,39 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox txtMultR;
-        private System.Windows.Forms.TextBox txtDivR;
-        private System.Windows.Forms.TextBox txtSubR;
-        private System.Windows.Forms.TextBox txtAddR;
         private System.Windows.Forms.Button btnNegative;
         private System.Windows.Forms.Button btnGenAndSum;
         private System.Windows.Forms.Button bt_hist;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart_P_Equalizado;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.ComboBox cbValueFilter;
         private System.Windows.Forms.Button btnGrayR;
-        private System.Windows.Forms.TextBox txtBinR;
         private System.Windows.Forms.Button btnBinaryR;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.GroupBox Filters;
+        private System.Windows.Forms.Button btnMedium;
+        private System.Windows.Forms.Button btnMin;
+        private System.Windows.Forms.Button btnMax;
+        private System.Windows.Forms.Button btnOrder;
+        private System.Windows.Forms.Button btnMedian;
+        private System.Windows.Forms.Button btnConservative;
+        private System.Windows.Forms.NumericUpDown txtOrder;
+        private System.Windows.Forms.NumericUpDown txtBinA;
+        private System.Windows.Forms.NumericUpDown txtMultA;
+        private System.Windows.Forms.NumericUpDown txtDivA;
+        private System.Windows.Forms.NumericUpDown txtDivB;
+        private System.Windows.Forms.NumericUpDown txtMultB;
+        private System.Windows.Forms.NumericUpDown txtBinB;
+        private System.Windows.Forms.NumericUpDown txtBinR;
+        private System.Windows.Forms.NumericUpDown txtMultR;
+        private System.Windows.Forms.NumericUpDown txtDivR;
+        private System.Windows.Forms.NumericUpDown txtSubR;
+        private System.Windows.Forms.NumericUpDown txtAddR;
+        private System.Windows.Forms.NumericUpDown txtBld;
+        private System.Windows.Forms.NumericUpDown nupGaussiana;
+        private System.Windows.Forms.Button btnGaussian;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.NumericUpDown txtFastGuassian;
     }
 }
 
